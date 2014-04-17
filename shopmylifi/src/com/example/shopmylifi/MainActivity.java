@@ -1,6 +1,6 @@
 //laura
 //prout
-//akash is the best 
+//akash is the worst 
 //marion2
 package com.example.shopmylifi;
 
