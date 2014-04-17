@@ -1,7 +1,3 @@
-//laura
-//prout
-//akash is the worst 
-//marion2
 package com.example.shopmylifi;
 
 import android.support.v7.app.ActionBarActivity;
