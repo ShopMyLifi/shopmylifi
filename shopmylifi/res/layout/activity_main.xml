@@ -6,11 +6,49 @@
     tools:context="com.example.shopmylifi.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <Button
-        android:id="@+id/main_button_liste_course"
-        android:layout_width="wrap_content"
+    <View
+        android:id="@+id/divider"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:background="@drawable/jaune_vert_gradient" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageButton
+            android:id="@+id/main_button_liste_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/main_button_itineraire"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_liste"
+            android:src="@drawable/liste" />
+
+        <ImageButton
+            android:id="@+id/main_button_itineraire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="85dp"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_itineraire"
+            android:src="@drawable/itineraire" />
+
+        <ImageButton
+            android:id="@+id/main_button_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_button_liste_course"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_map"
+            android:src="@drawable/carte" />
+    </RelativeLayout>
 
 </FrameLayout>
-
