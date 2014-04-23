@@ -8,5 +8,7 @@
     <string name="desc_button_liste">Liste</string>
     <string name="desc_button_map">Carte</string>
     <string name="desc_button_itineraire">Itinéraire</string>
-
+    <string name="desc_button_menu">Menu</string>
+    <string name="desc_button_settings">Réglages</string>
+    
 </resources>
