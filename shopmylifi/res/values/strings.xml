@@ -10,5 +10,10 @@
     <string name="desc_button_itineraire">Itinéraire</string>
     <string name="desc_button_menu">Menu</string>
     <string name="desc_button_settings">Réglages</string>
+    <string name="desc_bandeau_liste_course">Votre liste</string>
+    <string name="desc_button_home">Home</string>
+    <string name="desc_bandeau_pub">Publicité</string>
+
+    
     
 </resources>

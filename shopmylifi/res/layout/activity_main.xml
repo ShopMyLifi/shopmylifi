@@ -7,10 +7,34 @@
     tools:ignore="MergeRootFrame" >
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/background_gradient"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/jaune_vert_gradient" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fond_menu" >
+
+        <ImageButton
+            android:id="@+id/main_button_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_menu"
+            android:src="@drawable/bandeau_haut" />
+
+        <ImageButton
+            android:id="@+id/main_button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_settings"
+            android:src="@drawable/reglage" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,16 +52,6 @@
             android:src="@drawable/carte" />
 
         <ImageButton
-            android:id="@+id/main_button_liste_course"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="114dp"
-            android:layout_toLeftOf="@+id/main_button_map"
-            android:background="@null"
-            android:contentDescription="@string/desc_button_liste"
-            android:src="@drawable/liste" />
-
-        <ImageButton
             android:id="@+id/main_button_itineraire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,31 +61,27 @@
             android:background="@null"
             android:contentDescription="@string/desc_button_itineraire"
             android:src="@drawable/itineraire" />
+
+        <ImageButton
+            android:id="@+id/main_button_liste_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginTop="116dp"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_liste"
+            android:src="@drawable/liste" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+<!-- 
+    <ImageView
+        android:id="@+id/main_pub"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/fond_menu" >
-
-        <ImageButton
-            android:id="@+id/main_button_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/desc_button_menu"
-            android:src="@drawable/bandeau_haut"
-            android:layout_weight="5" />
-        	
-
-        <ImageButton
-            android:id="@+id/main_button_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/desc_button_settings"
-            android:src="@drawable/reglage"
-            android:layout_weight="1" />
-    </LinearLayout>
-
+        android:background="@null"
+        android:contentDescription="@string/desc_bandeau_pub"
+        android:src="@drawable/bandeau_pub" 
+        android:gravity="bottom" />
+ -->
 </FrameLayout>
