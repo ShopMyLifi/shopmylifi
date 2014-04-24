@@ -13,7 +13,6 @@
     <string name="desc_bandeau_liste_course">Votre liste</string>
     <string name="desc_button_home">Home</string>
     <string name="desc_bandeau_pub">Publicité</string>
+    <string name="desc_button_ad_article">Ajouter un article</string>
 
-    
-    
 </resources>

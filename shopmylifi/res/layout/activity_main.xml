@@ -36,52 +36,52 @@
             android:src="@drawable/reglage" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/main_pub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@null"
+        android:contentDescription="@string/desc_bandeau_pub"
+        android:src="@drawable/bandeau_pub" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <ImageButton
-            android:id="@+id/main_button_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/main_button_itineraire"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="102dp"
-            android:background="@null"
-            android:contentDescription="@string/desc_button_map"
-            android:src="@drawable/carte" />
-
-        <ImageButton
             android:id="@+id/main_button_itineraire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/main_button_liste_course"
+            android:layout_above="@+id/main_button_map"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="39dp"
+            android:layout_marginRight="45dp"
             android:background="@null"
             android:contentDescription="@string/desc_button_itineraire"
             android:src="@drawable/itineraire" />
 
         <ImageButton
+            android:id="@+id/main_button_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_button_liste_course"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_map"
+            android:src="@drawable/carte" />
+
+        <ImageButton
             android:id="@+id/main_button_liste_course"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="29dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="126dp"
+            android:layout_toLeftOf="@+id/main_button_map"
             android:background="@null"
             android:contentDescription="@string/desc_button_liste"
             android:src="@drawable/liste" />
+
     </RelativeLayout>
-<!-- 
-    <ImageView
-        android:id="@+id/main_pub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:contentDescription="@string/desc_bandeau_pub"
-        android:src="@drawable/bandeau_pub" 
-        android:gravity="bottom" />
- -->
+
 </FrameLayout>
