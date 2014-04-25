@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:id="@+id/container2"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/fond_menu" >
 
@@ -54,19 +54,21 @@
 
     <ListView
         android:id="@+id/id_display_liste_course"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/liste_course_pub"
         android:layout_below="@id/liste_course_button_ad" >
     </ListView>
 
     <ImageView
         android:id="@id/liste_course_pub"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@null"
+        android:background="#ffffff"
+		android:padding="4dp" 
         android:contentDescription="@string/desc_bandeau_pub"
-        android:src="@drawable/bandeau_pub" />
+        android:src="@drawable/bandeau_pub2"
+        android:adjustViewBounds="true" />
 
 </RelativeLayout>
