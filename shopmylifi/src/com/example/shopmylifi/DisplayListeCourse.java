@@ -2,7 +2,6 @@ package com.example.shopmylifi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,14 +11,15 @@ import android.widget.ListView;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
-
 import java.util.List;
+import android.view.Window;
 
 public class DisplayListeCourse extends Activity{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	    setContentView(R.layout.display_liste_course);
 	    
 	    final ImageButton homeButton = (ImageButton) findViewById(R.id.liste_course_button_home);
