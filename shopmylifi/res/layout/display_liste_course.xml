@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ffffff"
+    android:orientation="vertical"
     tools:context="com.example.shopmylifi.DisplayListeCourse"
     tools:ignore="MergeRootFrame" >
 
     <LinearLayout
+        android:id="@+id/container2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/fond_menu"
-        android:gravity="top" >
+        android:background="@drawable/fond_menu" >
 
         <ImageButton
             android:id="@+id/liste_course_button_home"
@@ -47,6 +47,7 @@
         android:id="@+id/liste_course_button_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/container2"
         android:background="@null"
         android:contentDescription="@string/desc_button_ad_article"
         android:src="@drawable/add_article" />
@@ -54,7 +55,18 @@
     <ListView
         android:id="@+id/id_display_liste_course"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/liste_course_pub"
+        android:layout_below="@id/liste_course_button_ad" >
     </ListView>
 
-</LinearLayout>
+    <ImageView
+        android:id="@id/liste_course_pub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:contentDescription="@string/desc_bandeau_pub"
+        android:src="@drawable/bandeau_pub" />
+
+</RelativeLayout>
