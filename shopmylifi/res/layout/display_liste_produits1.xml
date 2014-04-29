@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container_liste_courses"
+    android:id="@+id/container_liste_articles11"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.example.shopmylifi.DisplayListeCourse"
+    tools:context="com.example.shopmylifi.ListeProduits1Activity"
     tools:ignore="MergeRootFrame" >
 
     <LinearLayout
-        android:id="@+id/container_listes_courses2"
+        android:id="@+id/container_liste_articles12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/fond_menu" >
 
         <ImageButton
-            android:id="@+id/liste_course_button_home"
+            android:id="@+id/liste_articles1_button_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -25,16 +25,16 @@
             android:src="@drawable/home" />
 
         <ImageView
-            android:id="@+id/liste_course_title"
+            android:id="@+id/liste_articles1_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:background="@null"
             android:contentDescription="@string/desc_bandeau_liste_course"
-            android:src="@drawable/bandeau_liste_course" />
+            android:src="@drawable/bandeau_liste_articles1" />
 
         <ImageButton
-            android:id="@+id/liste_course_button_settings"
+            android:id="@+id/liste_articles1_button_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,32 +43,23 @@
             android:src="@drawable/reglage" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/liste_course_button_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/container_listes_courses2"
-        android:background="@null"
-        android:contentDescription="@string/desc_button_ad_article"
-        android:src="@drawable/add_article" />
-
     <ListView
-        android:id="@+id/id_display_liste_course"
+        android:id="@+id/id_display_liste_articles1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/liste_course_pub"
-        android:layout_below="@id/liste_course_button_ad" >
+        android:layout_above="@+id/liste_articles1_pub"
+        android:layout_below="@id/container_liste_articles12" >
     </ListView>
 
     <ImageView
-        android:id="@id/liste_course_pub"
+        android:id="@id/liste_articles1_pub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
         android:background="#ffffff"
-		android:padding="4dp" 
         android:contentDescription="@string/desc_bandeau_pub"
-        android:src="@drawable/bandeau_pub2"
-        android:adjustViewBounds="true" />
+        android:padding="4dp"
+        android:src="@drawable/bandeau_pub2" />
 
 </RelativeLayout>

@@ -14,42 +14,28 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 import android.view.Window;
 
-public class DisplayListeCourse extends Activity {
+public class ListeProduits1Activity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.display_liste_course);
+		setContentView(R.layout.display_liste_produits1);
 
-		final ImageButton homeButton = (ImageButton) findViewById(R.id.liste_course_button_home);
+		final ImageButton homeButton = (ImageButton) findViewById(R.id.liste_articles1_button_home);
 		homeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(DisplayListeCourse.this,
+				Intent intent = new Intent(ListeProduits1Activity.this,
 						MainActivity.class);
 				startActivity(intent);
 			}
 		});
 
-		final ImageButton ArticlesMagasinButton = (ImageButton) findViewById(R.id.liste_course_button_ad);
-		ArticlesMagasinButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(DisplayListeCourse.this,
-						ListeProduits1Activity.class);
-				startActivity(intent);
-			}
-		});
-
-		final ListView listview = (ListView) findViewById(R.id.id_display_liste_course);
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-				"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-				"Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-				"OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-				"Android", "iPhone", "WindowsMobile" };
+		final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
+		String[] values = new String[] { "Pâtes", "Pains", "Chaussettes",
+				"Riz", "Farines", "Gâteaux", "Bières" };
 
 		final ArrayList<String> list = new ArrayList<String>();
 		for (int i = 0; i < values.length; ++i) {
