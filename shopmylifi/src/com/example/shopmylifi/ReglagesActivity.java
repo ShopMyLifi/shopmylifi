@@ -1,6 +1,6 @@
 package com.example.shopmylifi;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,36 +10,33 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.view.Window;
 
-public class MainActivity extends ActionBarActivity {
+public class ReglagesActivity extends Activity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.display_reglages);
 
-		// final ImageButton itineraireButton = (ImageButton)
-		// findViewById(R.id.main_button_itineraire);
-		// final ImageButton carteButton = (ImageButton)
-		// findViewById(R.id.main_button_map);
-		final ImageButton listeButton = (ImageButton) findViewById(R.id.main_button_liste_course);
-		listeButton.setOnClickListener(new OnClickListener() {
+		final ImageButton homeButton = (ImageButton) findViewById(R.id.reglages_button_home);
+		homeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this,
-						DisplayListeCourse.class);
+				Intent intent = new Intent(ReglagesActivity.this,
+						MainActivity.class);
 				startActivity(intent);
 			}
 		});
 
-		final ImageButton reglagesButton = (ImageButton) findViewById(R.id.main_button_settings);
-		reglagesButton.setOnClickListener(new OnClickListener() {
+		final ImageButton quitButton = (ImageButton) findViewById(R.id.reglages_button_quit);
+		quitButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this,
-						ReglagesActivity.class);
+				Intent intent = new Intent();
+				intent.setAction(Intent.ACTION_MAIN);
+				intent.addCategory(Intent.CATEGORY_HOME);
 				startActivity(intent);
 			}
 		});

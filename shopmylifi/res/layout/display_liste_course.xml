@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container_liste_courses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -9,17 +8,18 @@
     tools:context="com.example.shopmylifi.DisplayListeCourse"
     tools:ignore="MergeRootFrame" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/container_listes_courses2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:background="@drawable/fond_menu" >
 
         <ImageButton
             android:id="@+id/liste_course_button_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
             android:background="@null"
             android:contentDescription="@string/desc_button_home"
             android:src="@drawable/home" />
@@ -28,7 +28,7 @@
             android:id="@+id/liste_course_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_centerInParent="true"
             android:background="@null"
             android:contentDescription="@string/desc_bandeau_liste_course"
             android:src="@drawable/bandeau_liste_course" />
@@ -37,11 +37,11 @@
             android:id="@+id/liste_course_button_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentRight="true"
             android:background="@null"
             android:contentDescription="@string/desc_button_settings"
             android:src="@drawable/reglage" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/liste_course_button_ad"
@@ -65,10 +65,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
         android:background="#ffffff"
-		android:padding="4dp" 
         android:contentDescription="@string/desc_bandeau_pub"
-        android:src="@drawable/bandeau_pub2"
-        android:adjustViewBounds="true" />
+        android:padding="4dp"
+        android:src="@drawable/bandeau_pub2" />
 
 </RelativeLayout>

@@ -31,6 +31,10 @@
             android:name=".ListeProduits1Activity"
             android:label="@string/title_display_liste_produits1"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReglagesActivity"
+            android:label="@string/title_display_reglages"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

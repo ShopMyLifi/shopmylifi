@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/background_gradient_reglages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/jaune_vert_gradient" />
+
+    <RelativeLayout
+        android:id="@+id/container_reglages2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/fond_menu" >
+
+        <ImageButton
+            android:id="@+id/reglages_button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_home"
+            android:src="@drawable/home" />
+
+        <ImageView
+            android:id="@+id/reglages_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:contentDescription="@string/desc_bandeau_reglages"
+            android:src="@drawable/bandeau_reglages" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/reglages_button_quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/reglages_pub"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@null"
+        android:contentDescription="@string/desc_button_quit"
+        android:src="@drawable/quit" />
+
+    <ImageView
+        android:id="@id/reglages_pub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:background="#ffffff"
+        android:contentDescription="@string/desc_bandeau_pub"
+        android:padding="4dp"
+        android:src="@drawable/bandeau_pub4" />
+
+</RelativeLayout>

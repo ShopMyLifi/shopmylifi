@@ -2,6 +2,7 @@ package com.example.shopmylifi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.ListView;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
+
 import java.util.List;
+
 import android.view.Window;
 
 public class ListeProduits1Activity extends Activity {
@@ -29,6 +32,17 @@ public class ListeProduits1Activity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(ListeProduits1Activity.this,
 						MainActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		final ImageButton reglagesButton = (ImageButton) findViewById(R.id.liste_articles1_button_settings);
+		reglagesButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ListeProduits1Activity.this,
+						ReglagesActivity.class);
 				startActivity(intent);
 			}
 		});
