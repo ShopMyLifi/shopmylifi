@@ -46,7 +46,7 @@ public class DisplayListeCourse extends Activity {
 
 	 private ProgressDialog pDialog;
 	 // url to get all products list
-    private static String url_all_products = "http://192.3.203.70/mysql.php";
+    private static String url_all_products = "http://192.3.203.70/clientlist.php";
  
    
  
@@ -90,9 +90,9 @@ public class DisplayListeCourse extends Activity {
 			}
 		});
 		
-		String exemple="";
+		String returnstring="";
 		try {
-		 exemple = new LoadAllProducts().execute().get();
+		 returnstring = new LoadAllProducts().execute().get();
 			
 		} catch (InterruptedException e) {
 			
@@ -105,16 +105,18 @@ public class DisplayListeCourse extends Activity {
 		
 		
 		final ListView listview = (ListView) findViewById(R.id.id_display_liste_course);
-		String[] values = exemple.split("\"");
-		
-		
 
 		final ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < values.length; ++i) {
-			if (values[i].compareTo("type")==0) {
-				list.add(values[i+2]);
+		
+		if (returnstring!="") {
+		String[] values = returnstring.split("\"");
+			for (int i = 0; i < values.length; ++i) {
+				if (values[i].compareTo("Nom")==0) {
+					list.add(values[i+2]);
+				}
 			}
-			
+		} else {
+			list.add("Votre liste est vide");
 		}
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 				android.R.layout.simple_list_item_1, list);
@@ -175,12 +177,18 @@ public class DisplayListeCourse extends Activity {
 	    		}
 	    		// Parse les données JSON
 	    		try{
+	    			if (result=="null") {
+	    				returnString="";
+	    				return returnString;
+	    			}
 	    			JSONArray jArray = new JSONArray(result);
+	    			 
 	    			for(int i=0;i<jArray.length();i++){
+	    				
 	    				JSONObject json_data = jArray.getJSONObject(i);
 	    				// Affichage ID_ville et Nom_ville dans le LogCat
-	    				Log.i("log_tag","ID: "+json_data.getInt("Id")+
-	    						", Type: "+json_data.getString("type")
+	    				Log.i("log_tag","ID: "+json_data.getInt("id_produit")+
+	    						", Type: "+json_data.getString("Nom")
 	    				);
 	    				// Résultats de la requête
 	    				returnString += "\n\t" + jArray.getJSONObject(i); 
