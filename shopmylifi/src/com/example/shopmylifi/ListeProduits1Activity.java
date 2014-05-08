@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.content.Context;
@@ -34,7 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.shopmylifi.DisplayListeCourse.LoadAllProducts;
+
 
 import android.view.Window;
 
@@ -71,6 +73,8 @@ public class ListeProduits1Activity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		
 
 		
 		String resultstring="";
@@ -98,10 +102,26 @@ public class ListeProduits1Activity extends Activity {
 				list.add(values[i+2]);
 			}
 		}
+		
+		
+		
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 				android.R.layout.simple_list_item_1, list);
 		listview.setAdapter(adapter);
-
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position,
+                    long id) {
+    
+            	Intent intent = new Intent(ListeProduits1Activity.this,
+						Displaycategory.class);
+            	intent.putExtra("position", position);
+				startActivity(intent);
+     
+            }
+        });
+		
 	}
 	
 	class LoadAllProducts extends AsyncTask<String, String, String> {
