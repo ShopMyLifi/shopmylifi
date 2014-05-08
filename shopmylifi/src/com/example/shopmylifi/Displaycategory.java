@@ -14,6 +14,7 @@ import android.renderscript.Type;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import android.widget.SimpleAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,6 +37,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 
 
@@ -107,7 +110,15 @@ public class Displaycategory extends Activity {
 		
 		final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
 
-		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position,
+                    long id) {
+    
+            	
+     
+            }
+        });
 		
 		String[] values = returnstring.split("\"");
 		
