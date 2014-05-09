@@ -33,6 +33,10 @@
             android:label="@string/title_display_liste_produits1"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Displaycategory"
+            android:label="@string/title_display_category"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ReglagesActivity"
             android:label="@string/title_display_reglages"
             android:screenOrientation="portrait" />
