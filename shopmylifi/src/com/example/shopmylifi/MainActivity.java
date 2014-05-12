@@ -1,4 +1,3 @@
-//test
 package com.example.shopmylifi;
 
 import android.support.v7.app.ActionBarActivity;
