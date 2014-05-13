@@ -245,6 +245,7 @@ public class DisplayListeCourse extends Activity {
 		switch (item.getItemId()) {
 		case R.id.option_listeCourses_deleteArticle:
 			// supprimer article
+			// apparemment le numéro de l'article séléctionné est retourné dans info.id
 
 		case R.id.option_listeCourses_deleteListe:
 			// supprimer liste
