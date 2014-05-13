@@ -14,11 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
@@ -39,28 +36,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-
-
-
-
-
 import java.util.List;
-
-
 
 import java.util.concurrent.ExecutionException;
 
 import android.view.Window;
 
 public class Displaycategory extends Activity {
-	
-	 private ProgressDialog pDialog;
-	 // url to get all products list
-    private static String url_all_products = "http://192.3.203.70/category.php";
-    private static String url_add_products = "http://192.3.203.70/addproduct.php";
- 
-   
+
+	private ProgressDialog pDialog;
+	// url to get all products list
+	private static String url_all_products = "http://192.3.203.70/category.php";
+	private static String url_add_products = "http://192.3.203.70/addproduct.php";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,8 +66,6 @@ public class Displaycategory extends Activity {
 			}
 		});
 
-		
-		
 		final ImageButton reglagesButton = (ImageButton) findViewById(R.id.liste_articles1_button_settings);
 		reglagesButton.setOnClickListener(new OnClickListener() {
 
@@ -90,251 +76,240 @@ public class Displaycategory extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		int position;
 		position = getIntent().getExtras().getInt("position");
 		position++;
 		String strposition;
 		strposition = String.valueOf(position);
-		
-		String returnstring="";
+
+		String returnstring = "";
 		try {
-		 returnstring = new LoadAllProducts().execute(strposition).get();
-			
+			returnstring = new LoadAllProducts().execute(strposition).get();
+
 		} catch (InterruptedException e) {
-			
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
 
-		
-		
 		final String[] values = returnstring.split("\"");
-		
-		
 
 		final ArrayList<String> list = new ArrayList<String>();
 		for (int i = 0; i < values.length; ++i) {
-			if (values[i].compareTo("Nom")==0) {
-				list.add(values[i+2]);
+			if (values[i].compareTo("Nom") == 0) {
+				list.add(values[i + 2]);
 			}
 		}
-		
+
 		final StableArrayAdapter adapter = new StableArrayAdapter(this,
 				android.R.layout.simple_list_item_1, list);
 		listview.setAdapter(adapter);
-		
+
 		listview.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position,
-                    long id) {
-    
-            String textselected = (String) listview.getItemAtPosition(position);
-           
-            String ItemId;
-            ItemId = "null";
-            for (int i = 0; i < values.length; ++i) {
-    			if (values[i].compareTo(textselected)==0) {
-    				ItemId = values[i+4];
-    			}
-    		}
-            String resultaddproduct;
-            
-            try {
-       		 resultaddproduct = new Addproduct().execute("1","1",ItemId).get();
-       			
-       		} catch (InterruptedException e) {
-       			
-       			// TODO Auto-generated catch block
-       			e.printStackTrace();
-       		} catch (ExecutionException e) {
-       			// TODO Auto-generated catch block
-       			e.printStackTrace();
-       		}
-            String textaffichage = textselected + " ajouté à la liste";
-            Toast toast=Toast.makeText(getApplicationContext(), textaffichage, Toast.LENGTH_SHORT);
-            toast.show();
-           
-            
-            }
-        });
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+
+				String textselected = (String) listview
+						.getItemAtPosition(position);
+
+				String ItemId;
+				ItemId = "null";
+				for (int i = 0; i < values.length; ++i) {
+					if (values[i].compareTo(textselected) == 0) {
+						ItemId = values[i + 4];
+					}
+				}
+				String resultaddproduct;
+
+				try {
+					resultaddproduct = new Addproduct().execute("1", "1",
+							ItemId).get();
+
+				} catch (InterruptedException e) {
+
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String textaffichage = textselected + " ajoutï¿½ ï¿½ la liste";
+				Toast toast = Toast.makeText(getApplicationContext(),
+						textaffichage, Toast.LENGTH_SHORT);
+				toast.show();
+
+			}
+		});
 
 	}
-	
-	
-	 class LoadAllProducts extends AsyncTask<String, String, String> {
-		 
-	        /**
-	         * Before starting background thread Show Progress Dialog
-	         * */
-	        @Override
-	        protected void onPreExecute() {
-	            super.onPreExecute();
-	            pDialog = new ProgressDialog(Displaycategory.this);
-	            pDialog.setMessage("Loading products. Please wait...");
-	            pDialog.setIndeterminate(false);
-	            pDialog.setCancelable(false);
-	            pDialog.show();
-	        }
-	 
-	        /**
-	         * getting All products from url
-	         * */
-	        protected String doInBackground(String... args) {
-	            // Building Parameters
-	            List<NameValuePair> params = new ArrayList<NameValuePair>();
-	            InputStream is = null;
-	            String result = "";
-	            String returnString = "";
-	            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	    		nameValuePairs.add(new BasicNameValuePair("id_type",args[0]));
-	           
-	            try{
-	            	        HttpClient httpclient = new DefaultHttpClient();
-	            		  
-	            		    String paramsString = URLEncodedUtils.format(nameValuePairs, "UTF-8");
-	            		    HttpGet httpGet = new HttpGet(url_all_products + "?" + paramsString);
-	            		    HttpResponse response = httpclient.execute(httpGet);
-	            	        HttpEntity entity = response.getEntity();
-	            		    is = entity.getContent();
-	            		 
-	            	        }catch(Exception e){
-	            	            Log.e("log_tag", "Error in http connection " + e.toString());
-	            	    }
-	            
-	            try{
-	    			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-	    			StringBuilder sb = new StringBuilder();
-	    			String line = null;
-	    			while ((line = reader.readLine()) != null) {
-	    				sb.append(line + "\n");
-	    			}
-	    			is.close();
-	    			result=sb.toString();
-	    		}catch(Exception e){
-	    			Log.e("log_tag", "Error converting result " + e.toString());
-	    		}
-	    		// Parse les données JSON
-	    		try{
-	    			if (result=="null") {
-	    				returnString="";
-	    				return returnString;
-	    			}
-	    			JSONArray jArray = new JSONArray(result);
-	    			 
-	    			for(int i=0;i<jArray.length();i++){
-	    				
-	    				JSONObject json_data = jArray.getJSONObject(i);
-	    				// Affichage ID_ville et Nom_ville dans le LogCat
-	    				Log.i("log_tag","ID: "+json_data.getInt("Id")+
-	    						", Nom: "+json_data.getString("Nom")
-	    				);
-	    				// Résultats de la requête
-	    				returnString += "\n\t" + jArray.getJSONObject(i); 
-	    			}
-	    		}catch(JSONException e){
-	    			Log.e("log_tag", "Error parsing data " + e.toString());
-	    		}
-	    		
-	    		return returnString; 
-	 
-	            
-	               
-	        }
-	        
-	        protected void onPostExecute(String file_url) {
-	            // dismiss the dialog after getting all products
-	            pDialog.dismiss();
-	            // updating UI from Background Thread
-	                
-	 
-	        }
-	 }
-	 
-	 class Addproduct extends AsyncTask<String, String, String> {
-		 
-	        /**
-	         * Before starting background thread Show Progress Dialog
-	         * */
-	        @Override
-	        protected void onPreExecute() {
-	            super.onPreExecute();
-	            pDialog = new ProgressDialog(Displaycategory.this);
-	            pDialog.setMessage("Loading products. Please wait...");
-	            pDialog.setIndeterminate(false);
-	            pDialog.setCancelable(false);
-	            pDialog.show();
-	        }
-	 
-	        /**
-	         * getting All products from url
-	         * */
-	        protected String doInBackground(String... args) {
-	            // Building Parameters
-	            List<NameValuePair> params = new ArrayList<NameValuePair>();
-	            InputStream is = null;
-	            String result = "";
-	            String returnString = "";
-	            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	    		nameValuePairs.add(new BasicNameValuePair("id_liste",args[0]));
-	    		nameValuePairs.add(new BasicNameValuePair("id_client",args[1]));
-	    		nameValuePairs.add(new BasicNameValuePair("id_produit",args[2]));
-	           
-	            try{
-	            	        HttpClient httpclient = new DefaultHttpClient();
-	            		  
-	            	        HttpPost httppost = new HttpPost(url_add_products);
-	            		    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-	            		    HttpResponse response = httpclient.execute(httppost);
-	            	        HttpEntity entity = response.getEntity();
-	            		    is = entity.getContent();
-	            		 
-	            	        }catch(Exception e){
-	            	            Log.e("log_tag", "Error in http connection " + e.toString());
-	            	    }
-	            
-	            try{
-	    			BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-	    			StringBuilder sb = new StringBuilder();
-	    			String line = null;
-	    			while ((line = reader.readLine()) != null) {
-	    				sb.append(line + "\n");
-	    			}
-	    			is.close();
-	    			result=sb.toString();
-	    		}catch(Exception e){
-	    			Log.e("log_tag", "Error converting result " + e.toString());
-	    		}
-	    		// Parse les données JSON
-	    			if (result=="null") {
-	    				returnString="";
-	    				return returnString;
-	    			} else {
-	    				returnString=result;
-	    			}
-	    			
-	    		
-	    		return returnString; 
-	 
-	            
-	               
-	        }
-	        
-	        protected void onPostExecute(String file_url) {
-	            // dismiss the dialog after getting all products
-	            pDialog.dismiss();
-	            // updating UI from Background Thread
-	                
-	 
-	        }
-	 }
-	       
+
+	class LoadAllProducts extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(Displaycategory.this);
+			pDialog.setMessage("Loading products. Please wait...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(false);
+			pDialog.show();
+		}
+
+		/**
+		 * getting All products from url
+		 * */
+		protected String doInBackground(String... args) {
+			// Building Parameters
+			InputStream is = null;
+			String result = "";
+			String returnString = "";
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("id_type", args[0]));
+
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+
+				String paramsString = URLEncodedUtils.format(nameValuePairs,
+						"UTF-8");
+				HttpGet httpGet = new HttpGet(url_all_products + "?"
+						+ paramsString);
+				HttpResponse response = httpclient.execute(httpGet);
+				HttpEntity entity = response.getEntity();
+				is = entity.getContent();
+
+			} catch (Exception e) {
+				Log.e("log_tag", "Error in http connection " + e.toString());
+			}
+
+			try {
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is, "iso-8859-1"), 8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				is.close();
+				result = sb.toString();
+			} catch (Exception e) {
+				Log.e("log_tag", "Error converting result " + e.toString());
+			}
+			// Parse les donnï¿½es JSON
+			try {
+				if (result == "null") {
+					returnString = "";
+					return returnString;
+				}
+				JSONArray jArray = new JSONArray(result);
+
+				for (int i = 0; i < jArray.length(); i++) {
+
+					JSONObject json_data = jArray.getJSONObject(i);
+					// Affichage ID_ville et Nom_ville dans le LogCat
+					Log.i("log_tag", "ID: " + json_data.getInt("Id")
+							+ ", Nom: " + json_data.getString("Nom"));
+					// Rï¿½sultats de la requï¿½te
+					returnString += "\n\t" + jArray.getJSONObject(i);
+				}
+			} catch (JSONException e) {
+				Log.e("log_tag", "Error parsing data " + e.toString());
+			}
+
+			return returnString;
+
+		}
+
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog after getting all products
+			pDialog.dismiss();
+			// updating UI from Background Thread
+
+		}
+	}
+
+	class Addproduct extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(Displaycategory.this);
+			pDialog.setMessage("Loading products. Please wait...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(false);
+			pDialog.show();
+		}
+
+		/**
+		 * getting All products from url
+		 * */
+		protected String doInBackground(String... args) {
+			// Building Parameters
+			InputStream is = null;
+			String result = "";
+			String returnString = "";
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("id_liste", args[0]));
+			nameValuePairs.add(new BasicNameValuePair("id_client", args[1]));
+			nameValuePairs.add(new BasicNameValuePair("id_produit", args[2]));
+
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+
+				HttpPost httppost = new HttpPost(url_add_products);
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				HttpResponse response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				is = entity.getContent();
+
+			} catch (Exception e) {
+				Log.e("log_tag", "Error in http connection " + e.toString());
+			}
+
+			try {
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is, "iso-8859-1"), 8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				is.close();
+				result = sb.toString();
+			} catch (Exception e) {
+				Log.e("log_tag", "Error converting result " + e.toString());
+			}
+			// Parse les donnï¿½es JSON
+			if (result == "null") {
+				returnString = "";
+				return returnString;
+			} else {
+				returnString = result;
+			}
+
+			return returnString;
+
+		}
+
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog after getting all products
+			pDialog.dismiss();
+			// updating UI from Background Thread
+
+		}
+	}
 
 	private class StableArrayAdapter extends ArrayAdapter<String> {
 
@@ -360,6 +335,5 @@ public class Displaycategory extends Activity {
 		}
 
 	}
-
 
 }

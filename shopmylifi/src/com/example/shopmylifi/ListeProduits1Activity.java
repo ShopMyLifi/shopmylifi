@@ -144,7 +144,6 @@ public class ListeProduits1Activity extends Activity {
          * */
         protected String doInBackground(String... args) {
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
             InputStream is = null;
             String result = "";
             String returnString = "";
@@ -175,7 +174,7 @@ public class ListeProduits1Activity extends Activity {
     		}catch(Exception e){
     			Log.e("log_tag", "Error converting result " + e.toString());
     		}
-    		// Parse les données JSON
+    		// Parse les donnï¿½es JSON
     		try{
     			JSONArray jArray = new JSONArray(result);
     			for(int i=0;i<jArray.length();i++){
@@ -184,7 +183,7 @@ public class ListeProduits1Activity extends Activity {
     				Log.i("log_tag","ID: "+json_data.getInt("Id")+
     						", Type: "+json_data.getString("type")
     				);
-    				// Résultats de la requête
+    				// Rï¿½sultats de la requï¿½te
     				returnString += "\n\t" + jArray.getJSONObject(i); 
     			}
     		}catch(JSONException e){

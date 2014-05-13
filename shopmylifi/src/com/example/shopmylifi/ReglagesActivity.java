@@ -34,10 +34,13 @@ public class ReglagesActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setAction(Intent.ACTION_MAIN);
-				intent.addCategory(Intent.CATEGORY_HOME);
+				Intent intent = new Intent(ReglagesActivity.this,
+						MainActivity.class);
 				startActivity(intent);
+				Intent intent2 = new Intent();
+				intent2.setAction(Intent.ACTION_MAIN);
+				intent2.addCategory(Intent.CATEGORY_HOME);
+				startActivity(intent2);
 			}
 		});
 	}
