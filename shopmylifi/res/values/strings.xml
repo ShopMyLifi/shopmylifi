@@ -19,5 +19,6 @@
     <string name="desc_button_ad_article">Ajouter un article</string>
     <string name="desc_bandeau_reglages">Réglages</string>
     <string name="desc_button_quit">Quitter ShopMyLiFi</string>
-
+    <string name="supprimer_article">Supprimer l\'article</string>
+    <string name="supprimer_liste">Supprimer la liste</string>
 </resources>
