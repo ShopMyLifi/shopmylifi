@@ -36,6 +36,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.shopmylifi.Displaycategory.Addproduct;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -46,6 +48,7 @@ public class DisplayListeCourse extends Activity {
 	private ProgressDialog pDialog;
 	// url to get all products list
 	private static String url_all_products = "http://192.3.203.70/clientlist.php";
+	private static String url_empty_list = "http://192.3.203.70/emptylist.php";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,7 @@ public class DisplayListeCourse extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(DisplayListeCourse.this,
 						ListeProduits1Activity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 100);
 			}
 		});
 
@@ -83,6 +86,7 @@ public class DisplayListeCourse extends Activity {
 				Intent intent = new Intent(DisplayListeCourse.this,
 						ReglagesActivity.class);
 				startActivity(intent);
+				
 			}
 		});
 
@@ -119,6 +123,7 @@ public class DisplayListeCourse extends Activity {
 		listview.setAdapter(adapter);
 
 	}
+	
 
 	class LoadAllProducts extends AsyncTask<String, String, String> {
 
@@ -202,6 +207,79 @@ public class DisplayListeCourse extends Activity {
 
 		}
 	}
+	
+	class Deletelist extends AsyncTask<String, String, String> {
+
+		/**
+		 * Before starting background thread Show Progress Dialog
+		 * */
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(DisplayListeCourse.this);
+			pDialog.setMessage("Loading products. Please wait...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(false);
+			pDialog.show();
+		}
+
+		/**
+		 * getting All products from url
+		 * */
+		protected String doInBackground(String... args) {
+			// Building Parameters
+			InputStream is = null;
+			String result = "";
+			String returnString = "";
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("id_liste", args[0]));
+			nameValuePairs.add(new BasicNameValuePair("id_client", args[1]));
+			
+
+			try {
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpPost httppost = new HttpPost(url_empty_list);
+				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				HttpResponse response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				is = entity.getContent();
+
+			} catch (Exception e) {
+				Log.e("log_tag", "Error in http connection " + e.toString());
+			}
+
+			try {
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(is, "iso-8859-1"), 8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				is.close();
+				result = sb.toString();
+			} catch (Exception e) {
+				Log.e("log_tag", "Error converting result " + e.toString());
+			}
+			// Parse les donn�es JSON
+			if (result == "null") {
+				returnString = "pas de reponse";
+				return returnString;
+			} else {
+				returnString = result;
+			}
+
+			return returnString;
+
+		}
+
+		protected void onPostExecute(String file_url) {
+			// dismiss the dialog after getting all products
+			pDialog.dismiss();
+			// updating UI from Background Thread
+
+		}
+	}
 
 	private class StableArrayAdapter extends ArrayAdapter<String> {
 
@@ -227,6 +305,20 @@ public class DisplayListeCourse extends Activity {
 		}
 
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // if result code 100
+        if (resultCode != 100) {
+            // if result code 100 is received
+            // means user edited/deleted product
+            // reload this screen again
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+ 
+    }
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -248,7 +340,25 @@ public class DisplayListeCourse extends Activity {
 			// apparemment le numéro de l'article séléctionné est retourné dans info.id
 
 		case R.id.option_listeCourses_deleteListe:
+		{
 			// supprimer liste
+			String resultdeletelist;
+			try {
+				resultdeletelist = new Deletelist().execute("1", "1").get();
+
+			} catch (InterruptedException e) {
+
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+		}
+		
 		default:
 			return super.onContextItemSelected(item);
 		}
