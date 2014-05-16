@@ -37,22 +37,11 @@
             android:src="@drawable/reglage" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/main_pub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:background="#ffffff"
-        android:contentDescription="@string/desc_bandeau_pub"
-        android:padding="4dp"
-        android:src="@drawable/bandeau_pub" />
-
     <RelativeLayout
-        android:layout_above="@id/main_pub"
-        android:layout_below="@id/container_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_pub"
+        android:layout_below="@id/container_main" >
 
         <ImageButton
             android:id="@+id/main_button_map"
@@ -85,7 +74,17 @@
             android:background="@null"
             android:contentDescription="@string/desc_button_liste"
             android:src="@drawable/liste" />
-
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/main_pub"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:background="#ffffff"
+        android:contentDescription="@string/desc_bandeau_pub"
+        android:padding="4dp"
+        android:src="@drawable/bandeau_pub" />
 
 </RelativeLayout>
