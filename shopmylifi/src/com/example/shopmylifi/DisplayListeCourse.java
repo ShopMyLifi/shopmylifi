@@ -52,14 +52,15 @@ public class DisplayListeCourse extends Activity {
 	private static String url_delete_product = "http://192.3.203.70/deleteproduct.php";
 
 	private String resultstring;
-	
-	public String getString() {
-        return resultstring;
-    }
 
-    public void setString(String resultstring) {
-        this.resultstring = resultstring;
-    }
+	public String getString() {
+		return resultstring;
+	}
+
+	public void setString(String resultstring) {
+		this.resultstring = resultstring;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,11 +97,11 @@ public class DisplayListeCourse extends Activity {
 				Intent intent = new Intent(DisplayListeCourse.this,
 						ReglagesActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
 
-		String resultat="";
+		String resultat = "";
 		try {
 			resultat = new LoadAllProducts().execute().get();
 
@@ -112,9 +113,9 @@ public class DisplayListeCourse extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		setString(resultat);
-		
+
 		final ListView listview = (ListView) findViewById(R.id.id_display_liste_course);
 		registerForContextMenu(listview);
 
@@ -135,7 +136,6 @@ public class DisplayListeCourse extends Activity {
 		listview.setAdapter(adapter);
 
 	}
-	
 
 	class LoadAllProducts extends AsyncTask<String, String, String> {
 
@@ -219,7 +219,7 @@ public class DisplayListeCourse extends Activity {
 
 		}
 	}
-	
+
 	class Deletelist extends AsyncTask<String, String, String> {
 
 		/**
@@ -272,7 +272,7 @@ public class DisplayListeCourse extends Activity {
 			} catch (Exception e) {
 				Log.e("log_tag", "Error converting result " + e.toString());
 			}
-			// Parse les donn�es JSON
+			// Parse les donn�es JSON
 			if (result == "null") {
 				returnString = "pas de reponse";
 				return returnString;
@@ -291,7 +291,7 @@ public class DisplayListeCourse extends Activity {
 
 		}
 	}
-	
+
 	class Deleteproduct extends AsyncTask<String, String, String> {
 
 		/**
@@ -321,7 +321,7 @@ public class DisplayListeCourse extends Activity {
 			nameValuePairs.add(new BasicNameValuePair("Id", args[2]));
 
 			try {
-				
+
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(url_delete_product);
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -346,7 +346,7 @@ public class DisplayListeCourse extends Activity {
 			} catch (Exception e) {
 				Log.e("log_tag", "Error converting result " + e.toString());
 			}
-			// Parse les donn�es JSON
+			// Parse les donn�es JSON
 			if (result == "null") {
 				returnString = "pas de reponse";
 				return returnString;
@@ -390,20 +390,20 @@ public class DisplayListeCourse extends Activity {
 		}
 
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // if result code 100
-        if (resultCode != 100) {
-            // if result code 100 is received
-            // means user edited/deleted product
-            // reload this screen again
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-        }
- 
-    }
+		super.onActivityResult(requestCode, resultCode, data);
+		// if result code 100
+		if (resultCode != 100) {
+			// if result code 100 is received
+			// means user edited/deleted product
+			// reload this screen again
+			Intent intent = getIntent();
+			finish();
+			startActivity(intent);
+		}
+
+	}
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
@@ -422,15 +422,14 @@ public class DisplayListeCourse extends Activity {
 		switch (item.getItemId()) {
 		case R.id.option_listeCourses_deleteArticle:
 			// supprimer article
-			// apparemment le numéro de l'article séléctionné est retourné dans info.id
-		{
-			int pos = (int) info.id;
-			String itemdelete = String.valueOf(3+pos*8);
-			String resultdeletelist="";
 
-			
+			int pos = (int) info.id;
+			String itemdelete = String.valueOf(3 + pos * 8);
+			String resultdeletelist = "";
+
 			try {
-				resultdeletelist = new Deleteproduct().execute("1","1",itemdelete).get();
+				resultdeletelist = new Deleteproduct().execute("1", "1",
+						itemdelete).get();
 
 			} catch (InterruptedException e) {
 
@@ -440,14 +439,13 @@ public class DisplayListeCourse extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
 
+			break;
 		case R.id.option_listeCourses_deleteListe:
-		{
 			// supprimer liste
-			String resultdeletelist;
+			String resultdeletelist2;
 			try {
-				resultdeletelist = new Deletelist().execute("1", "1").get();
+				resultdeletelist2 = new Deletelist().execute("1", "1").get();
 
 			} catch (InterruptedException e) {
 
@@ -458,12 +456,14 @@ public class DisplayListeCourse extends Activity {
 				e.printStackTrace();
 			}
 			Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-		}
-		
+			finish();
+			startActivity(intent);
+
+			break;
 		default:
-			return super.onContextItemSelected(item);
+			break;
 		}
+		return super.onContextItemSelected(item);
+
 	}
 }
