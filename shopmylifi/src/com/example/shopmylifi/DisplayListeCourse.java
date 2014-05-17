@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
@@ -192,6 +193,7 @@ public class DisplayListeCourse extends Activity {
 				if (result == "null") {
 					returnString = "";
 					return returnString;
+					
 				}
 				JSONArray jArray = new JSONArray(result);
 
@@ -347,13 +349,26 @@ public class DisplayListeCourse extends Activity {
 				Log.e("log_tag", "Error converting result " + e.toString());
 			}
 			// Parse les donn�es JSON
+			try {
 			if (result == "null") {
 				returnString = "pas de reponse";
 				return returnString;
 			} else {
-				returnString = result;
-			}
+				JSONArray jArray = new JSONArray(result);
 
+				for (int i = 0; i < jArray.length(); i++) {
+
+					JSONObject json_data = jArray.getJSONObject(i);
+					// Affichage ID_ville et Nom_ville dans le LogCat
+					Log.i("log_tag", "success: " + json_data.getInt("success")
+							+ ", message: " + json_data.getString("message"));
+					// Resultats de la requete
+					returnString += "\n\t" + jArray.getJSONObject(i);
+				} }
+				} catch (JSONException e) {
+				Log.e("log_tag", "Error parsing data " + e.toString());
+			}
+			
 			return returnString;
 
 		}
@@ -424,8 +439,13 @@ public class DisplayListeCourse extends Activity {
 			// supprimer article
 			
 			int pos = (int) info.id;
-			String itemdelete = String.valueOf(3 + pos * 8);
+			String listfull=getString();
+			String[] values = listfull.split("\"");
+		
+			String itemdelete = values[7+pos * 8];
 			String resultdeletelist = "";
+			
+			
 
 			try {
 				resultdeletelist = new Deleteproduct().execute("1", "1",
@@ -439,6 +459,9 @@ public class DisplayListeCourse extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			Intent intent1 = getIntent();
+			finish();
+			startActivity(intent1);
 
 			break;
 		case R.id.option_listeCourses_deleteListe:
