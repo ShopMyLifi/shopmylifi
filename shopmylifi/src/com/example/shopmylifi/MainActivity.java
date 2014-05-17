@@ -2,6 +2,7 @@ package com.example.shopmylifi;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +19,20 @@ public class MainActivity extends ActionBarActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 
-		// final ImageButton itineraireButton = (ImageButton)
-		// findViewById(R.id.main_button_itineraire);
-		// final ImageButton carteButton = (ImageButton)
-		// findViewById(R.id.main_button_map);
+		final ImageButton itineraireButton = (ImageButton) findViewById(R.id.main_button_itineraire);
+		itineraireButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				PackageManager pm = getPackageManager();
+				Intent intent = pm
+						.getLaunchIntentForPackage("com.example.lifilibrarydemo_image");
+				startActivity(intent);
+			}
+		});
+		// final ImageButton carteButton = (ImageButton) findViewById(R.id.main_button_map);
+		
+
 		final ImageButton listeButton = (ImageButton) findViewById(R.id.main_button_liste_course);
 		listeButton.setOnClickListener(new OnClickListener() {
 

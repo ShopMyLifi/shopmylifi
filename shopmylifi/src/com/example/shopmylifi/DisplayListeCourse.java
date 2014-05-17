@@ -422,7 +422,7 @@ public class DisplayListeCourse extends Activity {
 		switch (item.getItemId()) {
 		case R.id.option_listeCourses_deleteArticle:
 			// supprimer article
-
+			
 			int pos = (int) info.id;
 			String itemdelete = String.valueOf(3 + pos * 8);
 			String resultdeletelist = "";
