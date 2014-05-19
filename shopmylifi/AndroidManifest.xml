@@ -40,6 +40,10 @@
             android:name=".ReglagesActivity"
             android:label="@string/title_display_reglages"
             android:screenOrientation="portrait" />
+         <activity
+            android:name=".CreationMatriceDistance"
+            android:label="@string/title_display_matrice"
+            android:screenOrientation="portrait" />
     </application>
     
 

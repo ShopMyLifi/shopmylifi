@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -37,7 +38,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-
 import java.util.concurrent.ExecutionException;
 
 import android.view.Window;
@@ -143,6 +143,7 @@ public class Displaycategory extends Activity {
 				String textaffichage = textselected + " ajouté la liste";
 				Toast toast = Toast.makeText(getApplicationContext(),
 						textaffichage, Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 
 			}
