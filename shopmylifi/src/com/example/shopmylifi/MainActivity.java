@@ -39,17 +39,17 @@ public class MainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				
-				if (isPackageExisted("com.example.lifilibrarydemo_image")) {
-				PackageManager pm = getPackageManager();
-				Intent intent = pm
-						.getLaunchIntentForPackage("com.example.lifilibrarydemo_image");
-				startActivity(intent);
-				} else 
-				{
+//				if (isPackageExisted("com.example.lifilibrarydemo_image")) {
+//				PackageManager pm = getPackageManager();
+//				Intent intent = pm
+//						.getLaunchIntentForPackage("com.example.lifilibrarydemo_image");
+//				startActivity(intent);
+//				} else 
+				
 					Intent intent = new Intent(MainActivity.this,
 							CreationMatriceDistance.class);
 					startActivity(intent);
-				}
+				
 				
 				}
 			

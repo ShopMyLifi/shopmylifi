@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 
 
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -24,13 +25,16 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+
 
 public class CreationMatriceDistance extends Activity {
 	
@@ -52,7 +56,7 @@ public class CreationMatriceDistance extends Activity {
 		String resultstring="";
 		
 		try {
-		 resultstring = new getposition().execute().get();
+		 resultstring = new getposition().execute("1","1").get();
 			
 		} catch (InterruptedException e) {
 			
@@ -63,9 +67,23 @@ public class CreationMatriceDistance extends Activity {
 			e.printStackTrace();
 		}
 		
+		Toast toast = Toast.makeText(getApplicationContext(),
+				resultstring, Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
 		
 		final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
 		String[] values = resultstring.split("\"");
+		
+		ArrayList<String> association = new ArrayList<String>();
+		
+		for (int i = 0; i < values.length; ++i) {
+			if (values[i].compareTo("Id")==0) {
+				association.add(values[i+2]);
+			}
+		}
+		
+		
 		
 
 		final ArrayList<String> list = new ArrayList<String>();
@@ -75,12 +93,38 @@ public class CreationMatriceDistance extends Activity {
 			}
 		}
 		
+		int testdistance = calculdistance(43,6,46,7,76);
+		String testdist = String.valueOf(testdistance);
 		
+		Toast toast2 = Toast.makeText(getApplicationContext(),
+				testdist, Toast.LENGTH_SHORT);
+		toast2.setGravity(Gravity.BOTTOM, 0, 0);
+		toast2.show();
 		
-		
+	} 
 	
+	public int calculdistance(int x,int y,int w,int z, int largeur) {
+		int distance=0;
+		if (y==z) {
+			distance = Math.abs(w-x); 
+		}
+		else {
+			if (Math.abs(y-z)==1){
+				int trajet1=Math.abs(69-x)+2+Math.abs(69-w);
+				int trajet2=Math.abs(40-x)+2+Math.abs(40-w);
+				distance=Math.min(trajet1, trajet2);			
+			}
+			
+			if (((x<largeur/2) && (w>largeur/2)) || ((x>largeur/2)&&(w<largeur/2))) {
+			distance = Math.abs(w-x); 
+			distance = distance+Math.abs(y-z);
+			}
+		}
 		
+		return distance;
 	}
+	
+	
 	
 	class getposition extends AsyncTask<String, String, String> {
 
