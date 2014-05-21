@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
+
 
 
 
@@ -93,31 +95,67 @@ public class CreationMatriceDistance extends Activity {
 			}
 		}
 		
-		int testdistance = calculdistance(43,6,46,7,76);
-		String testdist = String.valueOf(testdistance);
+		int[][] matrice=new int[10][10];
 		
-		Toast toast2 = Toast.makeText(getApplicationContext(),
-				testdist, Toast.LENGTH_SHORT);
-		toast2.setGravity(Gravity.BOTTOM, 0, 0);
-		toast2.show();
+		for (int i = 0; i< association.size(); ++i) { //value of id
+			
+			int x = Integer.valueOf(values[12*i+7]);
+			int y = Integer.valueOf(values[12*i+11]);
+			
+			for (int j = 0; j<association.size(); j++) {
+				
+				int w = Integer.valueOf(values[12*j+7]);
+				int z = Integer.valueOf(values[12*j+11]);
+				matrice[i][j]=calculdistance(x,y,w,z,76);
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matrice));
 		
 	} 
 	
 	public int calculdistance(int x,int y,int w,int z, int largeur) {
 		int distance=0;
-		if (y==z) {
+		if (y==z) { //si même hauteur de rayon
 			distance = Math.abs(w-x); 
 		}
 		else {
-			if (Math.abs(y-z)==1){
+			if (Math.abs(y-z)==1){ //si même rayon mais face opposés
+				if ((x>largeur/2) && (w>largeur/2)) { //si côté droit magasin
 				int trajet1=Math.abs(69-x)+2+Math.abs(69-w);
 				int trajet2=Math.abs(40-x)+2+Math.abs(40-w);
-				distance=Math.min(trajet1, trajet2);			
-			}
-			
-			if (((x<largeur/2) && (w>largeur/2)) || ((x>largeur/2)&&(w<largeur/2))) {
-			distance = Math.abs(w-x); 
-			distance = distance+Math.abs(y-z);
+				distance=Math.min(trajet1, trajet2);
+				} else {
+					if ((x<largeur/2) && (w<largeur/2)) { //côté gauche du magasin
+						int trajet3=Math.abs(35-x)+2+Math.abs(35-w);
+						int trajet4=Math.abs(5-x)+2+Math.abs(5-w);
+						distance=Math.min(trajet3, trajet4);
+					} else { //si du côté gauche au côté droit ou inverse
+						distance = Math.abs(z-x)+2;
+					}
+					
+				}
+			} else {
+				if (((x<largeur/2) && (w>largeur/2)) || ((x>largeur/2)&&(w<largeur/2))) { //si pas même côté et pas même hauteur
+				distance = Math.abs(w-x); 
+				distance = distance+Math.abs(y-z);
+				} 
+				if ((x>largeur/2) && (w>largeur/2)) { //si même côté magasin mais pas même hauteur côté droit
+					int trajet5=Math.abs(69-x)+Math.abs(y-z)+Math.abs(69-w);
+					int trajet6=Math.abs(40-x)+Math.abs(y-z)+Math.abs(40-w);
+					distance=Math.min(trajet5, trajet6);
+				}
+				if ((x<largeur/2)&&(w<largeur/2)){ //même côté magasin côté gauche 
+					int trajet7=Math.abs(35-x)+Math.abs(y-z)+Math.abs(35-w);
+					int trajet8=Math.abs(5-x)+Math.abs(y-z)+Math.abs(5-w);
+					distance=Math.min(trajet7, trajet8);	
+				}
 			}
 		}
 		
