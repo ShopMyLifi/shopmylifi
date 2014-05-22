@@ -26,7 +26,7 @@
             android:layout_centerInParent="true"
             android:background="@null"
             android:contentDescription="@string/desc_bandeau_liste_course"
-            android:src="@drawable/bandeau_liste_course" />
+            android:src="@drawable/bandeau_itineraire" />
 
         <ImageButton
             android:id="@+id/itineraire_button_settings"
