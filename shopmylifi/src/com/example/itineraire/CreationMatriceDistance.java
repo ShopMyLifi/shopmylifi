@@ -1,4 +1,4 @@
-package com.example.shopmylifi;
+package com.example.itineraire;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
+
 
 
 
@@ -20,6 +21,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+
+import com.example.shopmylifi.R;
+import com.example.shopmylifi.R.id;
+import com.example.shopmylifi.R.layout;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -38,23 +43,16 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-public class CreationMatriceDistance extends Activity {
+public class CreationMatriceDistance {
 	
 	
 	private ProgressDialog pDialog;
 	private static String url_get_position = "http://192.3.203.70/getposition.php";
 
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.display_liste_produits1);
-
+	public void calculmatrice() {
+		
 	
-		
-
-		
 		String resultstring="";
 		
 		try {
@@ -69,12 +67,8 @@ public class CreationMatriceDistance extends Activity {
 			e.printStackTrace();
 		}
 		
-		Toast toast = Toast.makeText(getApplicationContext(),
-				resultstring, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
 		
-		final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
+		//final ListView listview = (ListView) findViewById(R.id.id_display_liste_articles1);
 		String[] values = resultstring.split("\"");
 		
 		ArrayList<String> association = new ArrayList<String>();
@@ -172,11 +166,11 @@ public class CreationMatriceDistance extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(CreationMatriceDistance.this);
-			pDialog.setMessage("Chargement de la liste en cours...");
-			pDialog.setIndeterminate(false);
-			pDialog.setCancelable(false);
-			pDialog.show();
+//			pDialog = new ProgressDialog(CreationMatriceDistance.this);
+//			pDialog.setMessage("Chargement de la liste en cours...");
+//			pDialog.setIndeterminate(false);
+//			pDialog.setCancelable(false);
+//			pDialog.show();
 		}
 
 		/**

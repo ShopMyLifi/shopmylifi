@@ -41,7 +41,7 @@
             android:label="@string/title_display_reglages"
             android:screenOrientation="portrait" />
          <activity
-            android:name=".CreationMatriceDistance"
+            android:name="com.example.itineraire.CreationMatriceDistance"
             android:label="@string/title_display_matrice"
             android:screenOrientation="portrait" />
     </application>

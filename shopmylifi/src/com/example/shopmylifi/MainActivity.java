@@ -2,6 +2,8 @@ package com.example.shopmylifi;
 
 import java.util.List;
 
+import com.example.itineraire.CreationMatriceDistance;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
