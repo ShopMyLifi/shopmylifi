@@ -9,6 +9,7 @@
     <string name="title_display_category">Affichage Liste des Catégories</string>
     <string name="title_display_reglages">Affichage Réglages</string>
     <string name="title_display_matrice">Calcul itinéraire </string>
+    <string name="title_itineraire">Calcul itinéraire </string>
     <string name="desc_button_liste">Liste</string>
     <string name="desc_button_map">Carte</string>
     <string name="desc_button_itineraire">Itinéraire</string>

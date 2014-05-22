@@ -11,7 +11,7 @@
         android:background="@drawable/fond_menu" >
 
         <ImageButton
-            android:id="@+id/liste_course_button_home"
+            android:id="@+id/itineraire_button_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
             android:src="@drawable/home" />
 
         <ImageView
-            android:id="@+id/liste_course_title"
+            android:id="@+id/itineraire_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -29,7 +29,7 @@
             android:src="@drawable/bandeau_liste_course" />
 
         <ImageButton
-            android:id="@+id/liste_course_button_settings"
+            android:id="@+id/itineraire_button_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -1,5 +1,9 @@
 package com.example.itineraire;
 
+import java.util.Arrays;
+
+import android.util.Log;
+
 public class CalculItineraire {
 
 	final static int PN = 0; // Previous Neighbor
@@ -14,12 +18,14 @@ public class CalculItineraire {
 		int matriceN[][] = new int[dim][2];
 
 		initNNAlgo(matriceD, matriceN);
-
+		
 		iti[0] = 0;
-		for (int i = 0; i < dim; i++) {
+		
+		for (int i = 0; i < dim-1; i++) {
 			iti[i + 1] = matriceN[iti[i]][NN];
 		}
-
+				
+		
 		/*
 		 * // meilleur inineraire pour le moment int[] bestNextPlace = new
 		 * int[dim];
@@ -76,7 +82,7 @@ public class CalculItineraire {
 					}
 				}
 			}
-			System.out.println();
+
 			matriceN[current][NN] = closestPoint;
 			matriceN[closestPoint][PN] = current;
 
@@ -88,13 +94,6 @@ public class CalculItineraire {
 
 		matriceN[0][PN] = current;
 		matriceN[current][NN] = 0;
-		for (int k = 0; k < dim; k++) {
-			System.out.print(k + "  ");
-			for (int m = 0; m < 2; m++) {
-				System.out.print(matriceN[k][m] + "  ");
-			}
-			System.out.println();
-		}
 
 	}
 
@@ -113,8 +112,6 @@ public class CalculItineraire {
 		int[] iti = new int[dim + 1];
 		computeIti(matrice, iti);
 
-		for (int i = 0; i < iti.length; i++)
-			System.out.println(iti[i]);
-
+	
 	}
 }
