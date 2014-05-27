@@ -40,6 +40,15 @@ public class CreationMatriceDistance {
 
 	private ProgressDialog pDialog;
 	private static String url_get_position = "http://192.3.203.70/getposition.php";
+	private static String resultstring;
+	
+	public static String getString() {
+		return resultstring;
+	}
+
+	public void setString(String resultstring) {
+		this.resultstring = resultstring;
+	}
 
 	public int[][] calculmatrice() {
 
@@ -60,6 +69,8 @@ public class CreationMatriceDistance {
 		String[] values = resultstring.split("\"");
 
 		ArrayList<String> association = new ArrayList<String>();
+		
+		setString(resultstring);
 
 		for (int i = 0; i < values.length; ++i) {
 			if (values[i].compareTo("Id") == 0) {
