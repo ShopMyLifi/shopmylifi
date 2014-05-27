@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/container_carte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/fond_menu" >
+
+        <ImageButton
+            android:id="@+id/carte_button_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_home"
+            android:src="@drawable/home" />
+
+        <ImageView
+            android:id="@+id/carte_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:contentDescription="@string/desc_bandeau_liste_course"
+            android:src="@drawable/bandeau_carte" />
+
+        <ImageButton
+            android:id="@+id/carte_button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:contentDescription="@string/desc_button_settings"
+            android:src="@drawable/reglage" />
+    </RelativeLayout>
+
+</RelativeLayout>

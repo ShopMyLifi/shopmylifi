@@ -1,11 +1,7 @@
 package com.example.shopmylifi;
 
-import java.util.List;
-
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,9 +31,19 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 		});
-		// final ImageButton carteButton = (ImageButton)
-		// findViewById(R.id.main_button_map);
+		final ImageButton carteButton = (ImageButton) findViewById(R.id.main_button_map);
+		carteButton.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(MainActivity.this,
+						CarteActivity.class);
+				startActivity(intent);
+
+			}
+
+		});
 		final ImageButton listeButton = (ImageButton) findViewById(R.id.main_button_liste_course);
 		listeButton.setOnClickListener(new OnClickListener() {
 
