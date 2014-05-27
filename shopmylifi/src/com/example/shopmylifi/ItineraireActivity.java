@@ -2,10 +2,13 @@ package com.example.shopmylifi;
 
 import java.io.FileOutputStream;
 import java.util.Arrays;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,7 +69,27 @@ public class ItineraireActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 		
 
-		
+		if (isPackageExisted("com.example.lifilibrarydemo_image")) {
+			PackageManager pm = getPackageManager();
+			Intent intent = pm
+					.getLaunchIntentForPackage("com.example.lifilibrarydemo_image");
+			startActivity(intent);
+		} else {
+			Toast toast2 = Toast.makeText(getApplicationContext(), "Application OLEDCOMM non installée", Toast.LENGTH_LONG);
+			toast2.show();
+		}
+
 	}
 
+	public boolean isPackageExisted(String targetPackage) {
+		List<ApplicationInfo> packages;
+		PackageManager pm;
+		pm = getPackageManager();
+		packages = pm.getInstalledApplications(0);
+		for (ApplicationInfo packageInfo : packages) {
+			if (packageInfo.packageName.equals(targetPackage))
+				return true;
+		}
+		return false;
+	}
 }
