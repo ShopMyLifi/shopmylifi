@@ -13,6 +13,8 @@ public class CalculItineraire {
 	public static void computeIti(int matriceD[][], int iti[]) {
 
 		int dim = matriceD.length;
+		
+		if(dim==0) return;
 
 		// matrice qui indique les deux voisins d'un élément
 		int matriceN[][] = new int[dim][2];

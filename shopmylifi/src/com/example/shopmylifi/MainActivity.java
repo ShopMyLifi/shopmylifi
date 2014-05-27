@@ -16,18 +16,6 @@ import android.view.Window;
 
 public class MainActivity extends ActionBarActivity {
 
-	public boolean isPackageExisted(String targetPackage) {
-		List<ApplicationInfo> packages;
-		PackageManager pm;
-		pm = getPackageManager();
-		packages = pm.getInstalledApplications(0);
-		for (ApplicationInfo packageInfo : packages) {
-			if (packageInfo.packageName.equals(targetPackage))
-				return true;
-		}
-		return false;
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,13 +27,6 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-
-				// if (isPackageExisted("com.example.lifilibrarydemo_image")) {
-				// PackageManager pm = getPackageManager();
-				// Intent intent = pm
-				// .getLaunchIntentForPackage("com.example.lifilibrarydemo_image");
-				// startActivity(intent);
-				// } else
 
 				Intent intent = new Intent(MainActivity.this,
 						ItineraireActivity.class);
