@@ -56,44 +56,62 @@ public class CalculCarte {
 			int z = matrice[i + 1][1];
 
 			if (y == z) { // si m�me hauteur de rayon
+				int hauteuriti=y;
+				if (carte[y-1][x]==2) {
+					hauteuriti=y+1;
+				}
+				if (carte[y+1][x]==2) {
+					hauteuriti=y-1;
+				}
 				if (x > w) {
 
 					for (int a = w; a <= x; ++a) { // si x>w
-						carte[a][y] = 1;
+						carte[a][hauteuriti] = 1;
 					}
 				} else {
 					for (int a = x; a <= w; ++a) { // si x<w
-						carte[a][y] = 1;
+						carte[a][hauteuriti] = 1;
 					}
 				}
 
 			} else {
 				if (Math.abs(y - z) == 1) { // si m�me rayon mais face oppos�s
+					int endessous;
+					int audessus;
+					if (z>y) { //initialisation
+						endessous=y-1;
+						audessus=z+1;
+					} else {
+						endessous=z-1;
+						audessus=y+1;
+					}
+				
+					
 					if ((x > largeur / 2) && (w > largeur / 2)) { // si c�t�
-																	// droit
-																	// magasin
+																	// droit											// magasin
+						
 						int trajet1 = Math.abs(69 - x) + 2 + Math.abs(69 - w); // droit
 						int trajet2 = Math.abs(40 - x) + 2 + Math.abs(40 - w);
 							if (trajet1 < trajet2) {            //montant
 								for (int a = x; a <= 69; ++a) { // si x>w
-									carte[a][y - 1] = 1;
+									carte[a][endessous] = 1;
 								}
 								
 								carte[70][y] = 1;
-								carte[70][y + 1] = 1;
+								carte[70][z] = 1;
 								
 								for (int a = w; a <= 69; ++a) { // si x>w
-									carte[a][y + 2] = 1;
+									carte[a][audessus] = 1;
 								}
 	
 							} else {
 								for (int a = 39; a <= x; ++a) { // si x<w
-									carte[a][y - 1] = 1;
+									carte[a][endessous] = 1;
 								}
 								carte[39][y] = 1;
-								carte[39][y + 1] = 1;
+								carte[39][z] = 1;
 								for (int a = 39; a <= w; ++a) { // si x>w
-									carte[a][y + 2] = 1;
+									carte[a][audessus] = 1;
 								}
 							}
 							
@@ -107,66 +125,49 @@ public class CalculCarte {
 							int trajet2 = Math.abs(5 - x) + 2 + Math.abs(5 - w);
 							if (trajet1 < trajet2) {
 								for (int a = x; a <= 35; ++a) { // si x>w
-									carte[a][y - 1] = 1;
+									carte[a][endessous] = 1;
 								}
 								carte[70][y] = 1;
-								carte[70][y + 1] = 1;
+								carte[70][z] = 1;
 								for (int a = w; a <= 35; ++a) { // si x>w
-									carte[a][y + 2] = 1;
+									carte[a][audessus] = 1;
 								}
 
 							} else {
 								for (int a = 5; x <= w; ++a) { // si x<w
-									carte[a][y - 1] = 1;
+									carte[a][endessous] = 1;
 								}
 								carte[39][y] = 1;
-								carte[39][y + 1] = 1;
+								carte[39][z] = 1;
 								for (int a = 39; a <= w; ++a) { // si x>w
-									carte[a][y + 2] = 1;
+									carte[a][audessus] = 1;
 								}
 							}
 
 						} else { // si du c�t� gauche au c�t� droit ou inverse
 							if ((x < largeur / 2) && (w > largeur / 2)) {
-								if (z > y) {
+								
 									for (int a = x; a <= 35; ++a) { // si x>w
-										carte[a][y - 1] = 1;
+										carte[a][endessous] = 1;
 									}
 									carte[37][y] = 1;
-									carte[37][y + 1] = 1;
+									carte[37][z] = 1;
 									for (int a = 37; a <= w; ++a) { // si x>w
-										carte[a][z + 1] = 1;
+										carte[a][audessus] = 1;
 									}
-								} else {
-									for (int a = x; a <= 35; ++a) { // si x>w
-										carte[a][y + 1] = 1;
-									}
-									carte[37][y - 1] = 1;
-									carte[37][y] = 1;
-									for (int a = 37; a <= w; ++a) { // si x>w
-										carte[a][z - 1] = 1;
-									}
-								}
+								
 							} else {
-								if (z > y) {
+								
 									for (int a = 37; a <= x; ++a) { // si x>w
-										carte[a][y - 1] = 1;
+										carte[a][endessous] = 1;
 									}
 									carte[37][y] = 1;
-									carte[37][y + 1] = 1;
+									carte[37][z] = 1;
 									for (int a = w; a <= 37; ++a) { // si x>w
-										carte[a][z + 1] = 1;
+										carte[a][audessus] = 1;
 									}
-								} else {
-									for (int a = w; a <= 37; ++a) { // si x>w
-										carte[a][z - 1] = 1;
-									}
-									carte[37][y + 1] = 1;
-									carte[37][y] = 1;
-									for (int a = 37; a <= x; ++a) { // si x>w
-										carte[a][y + 1] = 1;
-									}
-								}
+								
+								
 							}
 
 						}
