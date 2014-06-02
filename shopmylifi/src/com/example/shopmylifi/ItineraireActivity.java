@@ -1,6 +1,10 @@
 package com.example.shopmylifi;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,12 +28,13 @@ import com.example.itineraire.CalculItineraire;
 
 public class ItineraireActivity extends Activity {
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.display_itineraire);
-
+		
 		final ImageButton homeButton = (ImageButton) findViewById(R.id.itineraire_button_home);
 		homeButton.setOnClickListener(new OnClickListener() {
 
@@ -68,6 +74,9 @@ public class ItineraireActivity extends Activity {
 		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
 				Toast.LENGTH_SHORT).show();
 		
+		
+		matriceToText(matriceF);
+		
 
 		if (isPackageExisted("com.example.lifilibrarydemo_image")) {
 			PackageManager pm = getPackageManager();
@@ -91,5 +100,36 @@ public class ItineraireActivity extends Activity {
 				return true;
 		}
 		return false;
+	}
+	
+	public void matriceToText(int[][] matrice) {
+
+		try {
+			File sdCard = Environment.getExternalStorageDirectory();
+			File dir = new File (sdCard.getAbsolutePath());
+			dir.mkdirs();
+		    File file = new File(dir, "matrice.txt");
+		    FileOutputStream f = new FileOutputStream(file);
+	        PrintWriter pw = new PrintWriter(f);
+			int dim1 = matrice.length;
+			int dim2 = matrice[0].length;
+
+			for (int i = dim1-1; i >= 0; i--) {
+
+				for (int j = 0; j < dim2; j++) {
+					
+			        pw.print(Integer.toString(matrice[j][i]));
+			       
+				}
+				pw.println("");
+			}
+			pw.flush();
+			pw.close();
+			f.close();
+			Log.d("debug string","tableau écrit");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
 	}
 }

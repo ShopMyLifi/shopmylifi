@@ -1,10 +1,16 @@
 package com.example.itineraire;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import android.content.Context;
+import android.os.Environment;
 
 import com.example.itineraire.CreationMatriceDistance.getposition;
 
@@ -23,7 +29,7 @@ public class CalculCarte {
 			}
 		}
 		;
-		int[][] matrice = new int[association.size() + 1][2];
+		int[][] matrice = new int[association.size()][2];
 
 		for (int i = 0; i < association.size(); ++i) { // value of id
 
@@ -35,7 +41,7 @@ public class CalculCarte {
 		int largeur = 76;
 		int[][] carte = new int[85][85];
 
-		for (int i = 0; i < association.size(); ++i) {
+		for (int i = 0; i < association.size()-1; ++i) {
 			int x = matrice[i][0];
 			int y = matrice[i][1];
 			int w = matrice[i + 1][0];
@@ -48,7 +54,7 @@ public class CalculCarte {
 						carte[a][y] = 1;
 					}
 				} else {
-					for (int a = x; a <= w; ++a) { // si x>w
+					for (int a = x; a <= w; ++a) { // si x<w
 						carte[a][y] = 1;
 					}
 				}
@@ -60,26 +66,29 @@ public class CalculCarte {
 																	// magasin
 						int trajet1 = Math.abs(69 - x) + 2 + Math.abs(69 - w); // droit
 						int trajet2 = Math.abs(40 - x) + 2 + Math.abs(40 - w);
-						if (trajet1 < trajet2) {
-							for (int a = x; a <= 69; ++a) { // si x>w
-								carte[a][y - 1] = 1;
+							if (trajet1 < trajet2) {            //montant
+								for (int a = x; a <= 69; ++a) { // si x>w
+									carte[a][y - 1] = 1;
+								}
+								
+								carte[70][y] = 1;
+								carte[70][y + 1] = 1;
+								
+								for (int a = w; a <= 69; ++a) { // si x>w
+									carte[a][y + 2] = 1;
+								}
+	
+							} else {
+								for (int a = 39; a <= x; ++a) { // si x<w
+									carte[a][y - 1] = 1;
+								}
+								carte[39][y] = 1;
+								carte[39][y + 1] = 1;
+								for (int a = 39; a <= w; ++a) { // si x>w
+									carte[a][y + 2] = 1;
+								}
 							}
-							carte[70][y] = 1;
-							carte[70][y + 1] = 1;
-							for (int a = w; a <= 69; ++a) { // si x>w
-								carte[a][y + 2] = 1;
-							}
-
-						} else {
-							for (int a = 40; x <= 69; ++a) { // si x<w
-								carte[a][y - 1] = 1;
-							}
-							carte[39][y] = 1;
-							carte[39][y + 1] = 1;
-							for (int a = 39; a <= w; ++a) { // si x>w
-								carte[a][y + 2] = 1;
-							}
-						}
+							
 					} else {
 						if ((x < largeur / 2) && (w < largeur / 2)) { // c�t�
 																		// gauche
@@ -207,28 +216,6 @@ public class CalculCarte {
 
 	}
 
-	private static void matriceToText(int[][] matrice) {
-
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(
-					"matrice.txt"));
-
-			int dim1 = matrice.length;
-			int dim2 = matrice[0].length;
-
-			for (int i = 0; i < dim1; i++) {
-
-				for (int j = 0; j < dim2; j++) {
-					writer.write(Integer.toString(matrice[i][j]));
-				}
-				writer.newLine();
-			}
-			writer.flush();
-			writer.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-
-	}
+	
 
 }
