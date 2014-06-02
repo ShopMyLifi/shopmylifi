@@ -1,5 +1,7 @@
 package com.example.shopmylifi;
 
+import com.ortiz.touch.TouchImageView;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ public class CarteActivity extends Activity {
 
 			}
 		});
+		
 	}
 	
 
