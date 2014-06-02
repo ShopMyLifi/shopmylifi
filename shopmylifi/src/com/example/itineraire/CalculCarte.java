@@ -16,9 +16,18 @@ import com.example.itineraire.CreationMatriceDistance.getposition;
 
 public class CalculCarte {
 
-	public static int[][] calculmatriceitineraire(int[] iti, String result) {
+	public static int[][] calculmatriceitineraire(int[] iti, String result, int[][] matriceCarte) {
 
 		// matrice de l'ordre des objets
+		
+		int dim1 = matriceCarte.length;
+		int dim2 = matriceCarte[0].length;
+		
+		int[][] carte = new int[dim2][dim1];
+		/*	    
+		for (int i = 0; i < dim1; i++)
+	       carte[i] = (int []) matriceCarte[i].clone();
+		*/
 
 		String[] values = result.split("\"");
 
@@ -39,7 +48,6 @@ public class CalculCarte {
 
 		}
 		int largeur = 76;
-		int[][] carte = new int[85][85];
 
 		for (int i = 0; i < association.size()-1; ++i) {
 			int x = matrice[i][0];

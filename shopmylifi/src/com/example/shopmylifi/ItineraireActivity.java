@@ -29,7 +29,7 @@ import com.example.itineraire.CalculItineraire;
 
 public class ItineraireActivity extends Activity {
 	
-	int MATRICECARTE[][] = 
+	static int MATRICECARTE[][] = 
 	{{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
 	{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -105,7 +105,7 @@ public class ItineraireActivity extends Activity {
 		
 		String resultstring = CreationMatriceDistance.getString();
 		
-		matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring);
+		matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring, MATRICECARTE);
 		Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matriceF));
 		
 		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
