@@ -88,28 +88,29 @@ public class ItineraireActivity extends Activity {
 			}
 		});
 		
+		
+		CreationMatriceDistance creationMatrice = new CreationMatriceDistance();
+		
+		int[][] matriceD;
+		int[][] matriceF;
+		matriceD = creationMatrice.calculmatrice();
+		
+		int[] iti = new int[matriceD.length];
+		CalculItineraire.computeIti(matriceD, iti);
+		
+		String resultstring = CreationMatriceDistance.getString();
+		
+		//matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring);
+		
+		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
+				Toast.LENGTH_SHORT).show();
+		
 		try {
 			CreationImages.creationImage(MATRICECARTE);
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-/*
-		CreationMatriceDistance creationMatrice = new CreationMatriceDistance();
-
-		int[][] matriceD;
-		int[][] matriceF;
-		matriceD = creationMatrice.calculmatrice();
-
-		int[] iti = new int[matriceD.length];
-		CalculItineraire.computeIti(matriceD, iti);
-
-		String resultstring = CreationMatriceDistance.getString();
-		matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring);
-		Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matriceF));
-		
-		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
-				Toast.LENGTH_SHORT).show();
 		
 
 		if (isPackageExisted("com.example.lifilibrarydemo_image")) {
@@ -121,7 +122,7 @@ public class ItineraireActivity extends Activity {
 			Toast toast2 = Toast.makeText(getApplicationContext(), "Application OLEDCOMM non installée", Toast.LENGTH_LONG);
 			toast2.show();
 		}
-*/
+
 	}
 
 	public boolean isPackageExisted(String targetPackage) {
