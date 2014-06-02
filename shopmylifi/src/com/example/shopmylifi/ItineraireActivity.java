@@ -155,13 +155,13 @@ public class ItineraireActivity extends Activity {
 		    FileOutputStream f = new FileOutputStream(file);
 	        PrintWriter pw = new PrintWriter(f);
 			int dim1 = matrice.length;
-			int dim2 = matrice[0].length;
+			int dim2 = matrice[0].length; //endur
 
-			for (int i = dim1-1; i >= 0; i--) {
+			for (int b = dim2-1; b >= 0 ; b--) {
 
-				for (int j = 0; j < dim2; j++) {
+				for (int a = 0; a < dim1 ; a++) {
 					
-			        pw.print(Integer.toString(matrice[j][i]));
+			        pw.print(Integer.toString(matrice[a][b]));
 			       
 				}
 				pw.println("");
