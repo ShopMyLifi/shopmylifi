@@ -1,6 +1,10 @@
 package com.example.shopmylifi;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Environment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,10 +105,13 @@ public class ItineraireActivity extends Activity {
 		
 		String resultstring = CreationMatriceDistance.getString();
 		
-		//matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring);
+		matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring);
+		Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matriceF));
 		
 		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
 				Toast.LENGTH_SHORT).show();
+				
+		matriceToText(matriceF);
 		
 		try {
 			CreationImages.creationImage(MATRICECARTE);
@@ -135,5 +143,36 @@ public class ItineraireActivity extends Activity {
 				return true;
 		}
 		return false;
+	}
+	
+	public void matriceToText(int[][] matrice) {
+
+		try {
+			File sdCard = Environment.getExternalStorageDirectory();
+			File dir = new File (sdCard.getAbsolutePath());
+			dir.mkdirs();
+		    File file = new File(dir, "matrice.txt");
+		    FileOutputStream f = new FileOutputStream(file);
+	        PrintWriter pw = new PrintWriter(f);
+			int dim1 = matrice.length;
+			int dim2 = matrice[0].length;
+
+			for (int i = dim1-1; i >= 0; i--) {
+
+				for (int j = 0; j < dim2; j++) {
+					
+			        pw.print(Integer.toString(matrice[j][i]));
+			       
+				}
+				pw.println("");
+			}
+			pw.flush();
+			pw.close();
+			f.close();
+			Log.d("debug string","tableau ecrit");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
 	}
 }
