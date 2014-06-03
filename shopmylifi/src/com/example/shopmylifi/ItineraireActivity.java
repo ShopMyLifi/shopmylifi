@@ -100,7 +100,7 @@ public class ItineraireActivity extends Activity {
 		int[][] matriceF;
 		matriceD = creationMatrice.calculmatrice();
 		
-		int[] iti = new int[matriceD.length];
+		int[] iti = new int[matriceD.length + 1];
 		CalculItineraire.computeIti(matriceD, iti);
 		
 		String resultstring = CreationMatriceDistance.getString();

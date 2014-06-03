@@ -14,25 +14,32 @@ import android.os.Environment;
 public class CreationImages {
 
 	static final int SCALE = 10;
-	static final int X1 = 8;
-	static final int Y1 = 5;
-	static final int X2 = 8;
-	static final int Y2 = 10;
-	static final int X3 = 8;
-	static final int Y3 = 15;
-	static final int NUMBEROFPAINT = 5; 
+	/*
+	 * POSITIONS DES CAPTEURS LIFI 
+	 * origine en haut à gauche 
+	 * Y axe horizontal (croissant -> droite)
+	 * X axe vertical (croissant -> bas) 
+	 */
 	
+	static final int X1 = 7; 
+	static final int Y1 = 9;
+	static final int X2 = 20;
+	static final int Y2 = 9;
+	static final int X3 = 30;
+	static final int Y3 = 9;
+	static final int NUMBEROFPAINT = 5; // nombre de types de cases dans la
+										// matrice, sans compter la position
 
 	public static void creationImage(int[][] matrice) throws Throwable {
 
 		int dim1 = matrice.length;
 		int dim2 = matrice[0].length;
 
-		Bitmap bitmap = Bitmap.createBitmap(dim1 * SCALE, dim2 * SCALE,
+		Bitmap bitmap = Bitmap.createBitmap(dim2 * SCALE, dim1 * SCALE,
 				Bitmap.Config.ARGB_8888);
-		
+
 		Canvas canvas = new Canvas(bitmap);
-		
+
 		Paint tabPaint[] = new Paint[NUMBEROFPAINT];
 
 		Paint paintCouloir = new Paint();
@@ -42,54 +49,42 @@ public class CreationImages {
 
 		Paint paintCaisse = new Paint();
 		paintCaisse.setStyle(Paint.Style.FILL);
-		paintCaisse.setColor(Color.RED);
+		paintCaisse.setARGB(255,37,151,248);
 		tabPaint[1] = paintCaisse;
-		
+
 		Paint paintRayon = new Paint();
 		paintRayon.setStyle(Paint.Style.FILL);
-		paintRayon.setColor(Color.BLUE);
+		paintRayon.setARGB(255,109,185,0);
 		tabPaint[2] = paintRayon;
-		
+
 		Paint paintItineraire = new Paint();
 		paintItineraire.setStyle(Paint.Style.FILL);
-		paintItineraire.setColor(Color.GREEN);
+		paintItineraire.setARGB(255,248,176,37);
 		tabPaint[3] = paintItineraire;
 		
+		Paint paintArticle = new Paint();
+		paintArticle.setStyle(Paint.Style.FILL);
+		paintArticle.setARGB(255,248,197,37);
+		tabPaint[4] = paintArticle;
+
 		Paint paintPos = new Paint();
 		paintPos.setStyle(Paint.Style.FILL);
-		paintPos.setColor(Color.YELLOW);
-		
+		paintPos.setColor(Color.RED);
 
 		for (int i = 0; i < dim1; i++)
 			for (int j = 0; j < dim2; j++) {
-				switch (matrice[i][j]) {
 
-				case 0:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
+				int type = matrice[i][j];
+				if (type < NUMBEROFPAINT)
+					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
+							* SCALE + SCALE, tabPaint[matrice[i][j]]);
+				else
+					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
 							* SCALE + SCALE, paintCouloir);
-					break;
-				case 1:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintCaisse);
-					break;
-				case 2:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintRayon);
-					break;
-				case 3:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintItineraire);
-					break;
-
-				default:
-					canvas.drawPoint(i, j, paintCouloir);
-
-				}
-
 			}
-		
-		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
-				* SCALE + SCALE, paintPos);
+
+		canvas.drawRect(Y1 * SCALE, X1 * SCALE, Y1 * SCALE + SCALE, X1 * SCALE
+				+ SCALE, paintPos);
 
 		// Définition fichier
 		File sdCard = Environment.getExternalStorageDirectory();
@@ -113,11 +108,11 @@ public class CreationImages {
 
 			throw t;
 		}
-		
-		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
-				* SCALE + SCALE, paintItineraire);
-		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
-				* SCALE + SCALE, paintPos);
+
+		canvas.drawRect(Y1 * SCALE, X1 * SCALE, Y1 * SCALE + SCALE, X1 * SCALE
+				+ SCALE, tabPaint[matrice[X1][Y1]]);
+		canvas.drawRect(Y2 * SCALE, X2 * SCALE, Y2 * SCALE + SCALE, X2 * SCALE
+				+ SCALE, paintPos);
 
 		File file2 = new File(dir, "/oledcomm/image/2.jpg");
 		try {
@@ -135,12 +130,11 @@ public class CreationImages {
 
 			throw t;
 		}
-		
-		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
-				* SCALE + SCALE, paintItineraire);
-		canvas.drawRect(X3 * SCALE, Y3 * SCALE, X3 * SCALE + SCALE, Y3
-				* SCALE + SCALE, paintPos);
-		
+
+		canvas.drawRect(Y2 * SCALE, X2 * SCALE, Y2 * SCALE + SCALE, X2 * SCALE
+				+ SCALE, tabPaint[matrice[X2][Y2]]);
+		canvas.drawRect(Y3 * SCALE, X3 * SCALE, Y3 * SCALE + SCALE, X3 * SCALE
+				+ SCALE, paintPos);
 
 		File file3 = new File(dir, "/oledcomm/image/3.jpg");
 		try {
