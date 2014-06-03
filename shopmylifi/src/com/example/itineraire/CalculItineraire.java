@@ -25,7 +25,7 @@ public class CalculItineraire {
 
 		iti[0] = 0;
 
-		for (int i = 0; i < dim - 1; i++) {
+		for (int i = 0; i < dim ; i++) {
 			iti[i + 1] = matriceN[iti[i]][NN];
 		}
 	}
