@@ -85,25 +85,35 @@ public class CreationMatriceDistance {
 			}
 		}
 
-		int[][] matrice = new int[association.size()][association.size()];
+		int[][] matrice = new int[association.size()+1][association.size()+1];
+		int x,y,w,z;
+		for (int i = 0; i < association.size()+1; ++i) { // value of id
 
-		for (int i = 0; i < association.size(); ++i) { // value of id
-
-			int x = Integer.valueOf(values[12 * i + 7]);
-			int y = Integer.valueOf(values[12 * i + 11]);
-
-			for (int j = 0; j < association.size(); j++) {
-
-				int w = Integer.valueOf(values[12 * j + 7]);
-				int z = Integer.valueOf(values[12 * j + 11]);
+			if (i==0) {
+				 x = 36;
+				 y = 1;
+			} else {
+				
+			 x = Integer.valueOf(values[12 * (i-1) + 7]);
+			 y = Integer.valueOf(values[12 * (i-1) + 11]);
+			}
+			
+			for (int j = 0; j < association.size()+1; j++) {
+				if (j==0) {
+					 w = 36;
+					 z = 1;
+				} else {
+				 w = Integer.valueOf(values[12 * (j-1) + 7]);
+				 z = Integer.valueOf(values[12 * (j-1) + 11]);
+				}
 				matrice[i][j] = calculdistance(x, y, w, z, 76);
 
 			}
 		}
 
-		/*Log.d("this is my deep array",
+		Log.d("this is my deep array",
 				"deep arr: " + Arrays.deepToString(matrice));
-		*/
+		
 		return(matrice);
 
 	}

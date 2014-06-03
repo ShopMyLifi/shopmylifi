@@ -126,7 +126,9 @@ public class DisplayListeCourse extends Activity {
 			String[] values = resultat.split("\"");
 			for (int i = 0; i < values.length; ++i) {
 				if (values[i].compareTo("Nom") == 0) {
+					if (values[i+2].compareTo("porte") != 0){
 					list.add(values[i + 2]);
+					}
 				}
 			}
 		} else {

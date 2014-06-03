@@ -41,31 +41,46 @@ public class CalculCarte {
 			}
 		}
 		;
-		int[][] matrice = new int[association.size()][2];
+		int[][] matrice = new int[association.size()+1][2];
 
-		for (int i = 0; i < association.size(); ++i) { // value of id
-
+		for (int i = 0; i < association.size()+1; ++i) { // value of id
+			if (i==0) {
+				
+				matrice[i][0] = 36;
+				matrice[i][1] = 1;
+			} else {
 			int j = iti[i];
-			matrice[i][0] = Integer.valueOf(values[12 * j + 7]);
-			matrice[i][1] = Integer.valueOf(values[12 * j + 11]);
-
+			matrice[i][0] = Integer.valueOf(values[12 * (j-1) + 7]);
+			matrice[i][1] = Integer.valueOf(values[12 * (j-1) + 11]);
+			}
 		}
 		int largeur = 76;
-		carte[4][6] = 8;
+		
 
-		for (int i = 0; i < association.size() - 1; ++i) {
+		for (int i = 0; i < association.size(); ++i) {
 			int x = matrice[i][0];
 			int y = matrice[i][1];
 			int w = matrice[i + 1][0];
 			int z = matrice[i + 1][1];
 			int hauteuriti = y;
+			int hauteuritiforz = z;
 			if (carte[x][y - 1] == 2) {
 				hauteuriti = y + 1;
 			}
 			if (carte[x][y + 1] == 2) {
 				hauteuriti = y - 1;
 			}
-
+			if (carte[w][z - 1] == 2) {
+				hauteuritiforz = z + 1;
+			}
+			if (carte[w][z + 1] == 2) {
+				hauteuritiforz = z - 1;
+			}
+			
+			//ajout des points de chaque article
+			carte[x][y]=4;
+			carte[w][z]=4;
+			
 			if (y == z) { // si m�me hauteur de rayon
 
 				if (x > w) {
@@ -184,16 +199,16 @@ public class CalculCarte {
 						}
 						if (z > y) {
 							for (int a = y; a < z; a++) { // go en haut
-								carte[35][a] = 3;
+								carte[37][a] = 3;
 							}
 						} else {
 							for (int a = z; a < y; a++) { // go en haut
-								carte[35][a] = 3;
+								carte[37][a] = 3;
 							}
 						}
 
-						for (int a = 35; a <= w; ++a) { // si go � droite
-							carte[a][z + 1] = 3;
+						for (int a = 37; a <= w; ++a) { // si go � droite
+							carte[a][hauteuritiforz] = 3;
 						}
 						// m�me
 						// c�t�
@@ -201,6 +216,24 @@ public class CalculCarte {
 						// pas
 						// m�me
 						// hauteur
+					}
+					if ((x > largeur / 2) && (w < largeur / 2)) {
+						for (int a = 37; a <= x; ++a) { // go � droite
+							carte[a][hauteuriti] = 3;
+						}
+						if (z > y) {
+							for (int a = y; a < z; a++) { // go en haut
+								carte[37][a] = 3;
+							}
+						} else {
+							for (int a = z; a < y; a++) { // go en haut
+								carte[37][a] = 3;
+							}
+						}
+
+						for (int a = w; a <= 37; ++a) { // si go � droite
+							carte[a][hauteuritiforz] = 3;
+						}
 					}
 					if ((x > largeur / 2) && (w > largeur / 2)) { // si m�me
 																	// c�t�
@@ -210,10 +243,49 @@ public class CalculCarte {
 																	// hauteur
 																	// c�t�
 																	// droit
-						int trajet5 = Math.abs(69 - x) + Math.abs(y - z)
-								+ Math.abs(69 - w);
-						int trajet6 = Math.abs(40 - x) + Math.abs(y - z)
-								+ Math.abs(40 - w);
+						int trajet5 = Math.abs(68 - x) + Math.abs(y - z)
+								+ Math.abs(68 - w);
+						int trajet6 = Math.abs(38 - x) + Math.abs(y - z)
+								+ Math.abs(38 - w);
+						if (trajet5 < trajet6) {
+							for (int a = x; a <= 68; ++a) { // si x>w
+								carte[a][hauteuriti] = 3;
+							}
+							
+							if (z > y) {
+								for (int a = y; a < z; a++) { // go en haut
+									carte[68][a] = 3;
+								}
+							} else {
+								for (int a = z; a < y; a++) { // go en haut
+									carte[68][a] = 3;
+								}
+							}
+							
+							for (int a = w; a <= 68; ++a) { // si x>w
+								carte[a][hauteuritiforz] = 3;
+							}
+
+						} else {
+							for (int a = 35; a <= x; ++a) { // si x>w
+								carte[a][hauteuriti] = 3;
+							}
+							
+							if (z > y) {
+								for (int a = y; a < z; a++) { // go en haut
+									carte[37][a] = 3;
+								}
+							} else {
+								for (int a = z; a < y; a++) { // go en haut
+									carte[37][a] = 3;
+								}
+							}
+							
+							for (int a = 37; a <= w ; ++a) { // si x>w
+								carte[a][hauteuritiforz] = 3;
+							}
+						}
+						
 						// distance = Math.min(trajet5, trajet6);
 					}
 					if ((x < largeur / 2) && (w < largeur / 2)) { // m�me c�t�
@@ -225,6 +297,44 @@ public class CalculCarte {
 						int trajet8 = Math.abs(5 - x) + Math.abs(y - z)
 								+ Math.abs(5 - w);
 						// distance = Math.min(trajet7, trajet8);
+						if (trajet7 < trajet8) {
+							for (int a = x; a <= 35; ++a) { // si x>w
+								carte[a][hauteuriti] = 3;
+							}
+							
+							if (z > y) {
+								for (int a = y; a < z; a++) { // go en haut
+									carte[35][a] = 3;
+								}
+							} else {
+								for (int a = z; a < y; a++) { // go en haut
+									carte[35][a] = 3;
+								}
+							}
+							
+							for (int a = w; a <= 35; ++a) { // si x>w
+								carte[a][hauteuritiforz] = 3;
+							}
+
+						} else {
+							for (int a = 4; a <= x; ++a) { // si x>w
+								carte[a][hauteuriti] = 3;
+							}
+							
+							if (z > y) {
+								for (int a = y; a < z; a++) { // go en haut
+									carte[4][a] = 3;
+								}
+							} else {
+								for (int a = z; a < y; a++) { // go en haut
+									carte[4][a] = 3;
+								}
+							}
+							
+							for (int a = 4; a <= w ; ++a) { // si x>w
+								carte[a][hauteuritiforz] = 3;
+							}
+						}
 					}
 				}
 			}
