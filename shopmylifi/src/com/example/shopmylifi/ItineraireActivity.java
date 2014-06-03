@@ -105,13 +105,13 @@ public class ItineraireActivity extends Activity {
 		
 		String resultstring = CreationMatriceDistance.getString();
 		
-		matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring, MATRICECARTE);
-		Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matriceF));
+		//matriceF= CalculCarte.calculmatriceitineraire(iti,resultstring, MATRICECARTE);
+	//	Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(matriceF));
 		
 		Toast.makeText(getApplicationContext(), (Arrays.toString(iti)),
 				Toast.LENGTH_SHORT).show();
 				
-		matriceToText(matriceF);
+		//matriceToText(matriceF);
 		
 		try {
 			CreationImages.creationImage(MATRICECARTE);

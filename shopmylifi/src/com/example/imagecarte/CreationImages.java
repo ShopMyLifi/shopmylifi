@@ -13,13 +13,14 @@ import android.os.Environment;
 
 public class CreationImages {
 
-	static int SCALE = 10;
-	static int X1 = 8;
-	static int Y1 = 5;
-	static int X2 = 8;
-	static int Y2 = 10;
-	static int X3 = 8;
-	static int Y3 = 15;
+	static final int SCALE = 10;
+	static final int X1 = 8;
+	static final int Y1 = 5;
+	static final int X2 = 8;
+	static final int Y2 = 10;
+	static final int X3 = 8;
+	static final int Y3 = 15;
+	static final int NUMBEROFPAINT = 4; //nombre de types de cases dans la matrice, sans compter la position
 
 	public static void creationImage(int[][] matrice) throws Throwable {
 
@@ -28,56 +29,39 @@ public class CreationImages {
 
 		Bitmap bitmap = Bitmap.createBitmap(dim1 * SCALE, dim2 * SCALE,
 				Bitmap.Config.ARGB_8888);
-
+		
 		Canvas canvas = new Canvas(bitmap);
+		
+		Paint tabPaint[] = new Paint[NUMBEROFPAINT];
 
 		Paint paintCouloir = new Paint();
 		paintCouloir.setStyle(Paint.Style.FILL);
 		paintCouloir.setColor(Color.WHITE);
+		tabPaint[0] = paintCouloir;
 
 		Paint paintCaisse = new Paint();
 		paintCaisse.setStyle(Paint.Style.FILL);
 		paintCaisse.setColor(Color.RED);
-
+		tabPaint[1] = paintCaisse;
+		
 		Paint paintRayon = new Paint();
 		paintRayon.setStyle(Paint.Style.FILL);
 		paintRayon.setColor(Color.BLUE);
-
+		tabPaint[2] = paintRayon;
+		
 		Paint paintItineraire = new Paint();
 		paintItineraire.setStyle(Paint.Style.FILL);
 		paintItineraire.setColor(Color.GREEN);
-
+		tabPaint[3] = paintItineraire;
+		
 		Paint paintPos = new Paint();
 		paintPos.setStyle(Paint.Style.FILL);
 		paintPos.setColor(Color.YELLOW);
 
 		for (int i = 0; i < dim1; i++)
-			for (int j = 0; j < dim2; j++) {
-				switch (matrice[i][j]) {
-
-				case 0:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintCouloir);
-					break;
-				case 1:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintCaisse);
-					break;
-				case 2:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintRayon);
-					break;
-				case 3:
-					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
-							* SCALE + SCALE, paintItineraire);
-					break;
-
-				default:
-					canvas.drawPoint(i, j, paintCouloir);
-
-				}
-
-			}
+			for (int j = 0; j < dim2; j++) 
+				canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j * SCALE + SCALE, tabPaint[matrice[i][j]]);
+					
 		
 		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
 				* SCALE + SCALE, paintPos);
@@ -106,7 +90,7 @@ public class CreationImages {
 		}
 		
 		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
-				* SCALE + SCALE, paintItineraire);
+				* SCALE + SCALE, tabPaint[matrice[X1][Y1]]);
 		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
 				* SCALE + SCALE, paintPos);
 
@@ -128,7 +112,7 @@ public class CreationImages {
 		}
 		
 		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
-				* SCALE + SCALE, paintItineraire);
+				* SCALE + SCALE, tabPaint[matrice[X1][Y1]]);
 		canvas.drawRect(X3 * SCALE, Y3 * SCALE, X3 * SCALE + SCALE, Y3
 				* SCALE + SCALE, paintPos);
 		
