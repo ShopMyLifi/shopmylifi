@@ -20,7 +20,8 @@ public class CreationImages {
 	static final int Y2 = 10;
 	static final int X3 = 8;
 	static final int Y3 = 15;
-	static final int NUMBEROFPAINT = 4; //nombre de types de cases dans la matrice, sans compter la position
+	static final int NUMBEROFPAINT = 5; 
+	
 
 	public static void creationImage(int[][] matrice) throws Throwable {
 
@@ -57,11 +58,35 @@ public class CreationImages {
 		Paint paintPos = new Paint();
 		paintPos.setStyle(Paint.Style.FILL);
 		paintPos.setColor(Color.YELLOW);
+		
 
 		for (int i = 0; i < dim1; i++)
-			for (int j = 0; j < dim2; j++) 
-				canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j * SCALE + SCALE, tabPaint[matrice[i][j]]);
-					
+			for (int j = 0; j < dim2; j++) {
+				switch (matrice[i][j]) {
+
+				case 0:
+					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
+							* SCALE + SCALE, paintCouloir);
+					break;
+				case 1:
+					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
+							* SCALE + SCALE, paintCaisse);
+					break;
+				case 2:
+					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
+							* SCALE + SCALE, paintRayon);
+					break;
+				case 3:
+					canvas.drawRect(i * SCALE, j * SCALE, i * SCALE + SCALE, j
+							* SCALE + SCALE, paintItineraire);
+					break;
+
+				default:
+					canvas.drawPoint(i, j, paintCouloir);
+
+				}
+
+			}
 		
 		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
 				* SCALE + SCALE, paintPos);
@@ -90,7 +115,7 @@ public class CreationImages {
 		}
 		
 		canvas.drawRect(X1 * SCALE, Y1 * SCALE, X1 * SCALE + SCALE, Y1
-				* SCALE + SCALE, tabPaint[matrice[X1][Y1]]);
+				* SCALE + SCALE, paintItineraire);
 		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
 				* SCALE + SCALE, paintPos);
 
@@ -112,7 +137,7 @@ public class CreationImages {
 		}
 		
 		canvas.drawRect(X2 * SCALE, Y2 * SCALE, X2 * SCALE + SCALE, Y2
-				* SCALE + SCALE, tabPaint[matrice[X1][Y1]]);
+				* SCALE + SCALE, paintItineraire);
 		canvas.drawRect(X3 * SCALE, Y3 * SCALE, X3 * SCALE + SCALE, Y3
 				* SCALE + SCALE, paintPos);
 		
