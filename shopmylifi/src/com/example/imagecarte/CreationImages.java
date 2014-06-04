@@ -21,12 +21,12 @@ public class CreationImages {
 	 * X axe vertical (croissant -> bas) 
 	 */
 	
-	static final int X1 = 7; 
-	static final int Y1 = 9;
-	static final int X2 = 20;
+	static final int X1 = 36; 
+	static final int Y1 = 3;
+	static final int X2 = 36;
 	static final int Y2 = 9;
-	static final int X3 = 30;
-	static final int Y3 = 9;
+	static final int X3 = 36;
+	static final int Y3 = 15;
 	static final int NUMBEROFPAINT = 5; // nombre de types de cases dans la
 										// matrice, sans compter la position
 
