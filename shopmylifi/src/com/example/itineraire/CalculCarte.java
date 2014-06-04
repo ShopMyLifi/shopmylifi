@@ -65,16 +65,16 @@ public class CalculCarte {
 			int hauteurdouble=y;
 			int hauteuriti = y;
 			int hauteuritiforz = z;
-			if (carte[x][y - 1] == 2) {
+			if ((carte[x][y - 1] == 2) || (carte[x][y - 1] == 4)) {
 				hauteuriti = y + 1;
 			}
-			if (carte[x][y + 1] == 2) {
+			if ((carte[x][y + 1] == 2)  || (carte[x][y + 1] == 4)) {
 				hauteuriti = y - 1;
 			}
-			if (carte[w][z - 1] == 2) {
+			if ((carte[w][z - 1] == 2) || (carte[w][z - 1] == 4)) {
 				hauteuritiforz = z + 1;
 			}
-			if (carte[w][z + 1] == 2) {
+			if ((carte[w][z + 1] == 2)  || (carte[w][z + 1] == 4)) {
 				hauteuritiforz = z - 1;
 			}
 			if (z > y) { // initialisation
@@ -160,7 +160,7 @@ public class CalculCarte {
 								}
 
 							} else {
-								for (int a = 5; x <= w; ++a) { // si x<w
+								for (int a = 4; a <= x; ++a) { // si x<w
 									carte[a][endessous] = 3;
 								}
 								carte[4][y] = 3;
@@ -334,11 +334,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = y; a <= z; a++) { // go en haut
+									for (int a = y; a < z; a++) { // go en haut
 										carte[35][a] = 3;
 									}
 								} else {
-									for (int a = z; a <= y; a++) { // go en haut
+									for (int a = z; a < y; a++) { // go en haut
 										carte[35][a] = 3;
 									}
 								}
@@ -353,11 +353,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = y; a < z; a++) { // go en haut
+									for (int a = hauteuriti; a < z; a++) { // go en haut
 										carte[4][a] = 3;
 									}
 								} else {
-									for (int a = z; a < y; a++) { // go en haut
+									for (int a = hauteuritiforz; a < y; a++) { // go en haut
 										carte[4][a] = 3;
 									}
 								}
