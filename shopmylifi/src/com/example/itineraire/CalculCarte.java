@@ -131,12 +131,12 @@ public class CalculCarte {
 							}
 
 						} else {
-							for (int a = 38; a <= x; ++a) { // si x<w
+							for (int a = 37; a <= x; ++a) { // si x<w
 								carte[a][endessous] = 3;
 							}
-							carte[38][y] = 3;
-							carte[38][z] = 3;
-							for (int a = 38; a <= w; ++a) { // si x>w
+							carte[37][y] = 3;
+							carte[37][z] = 3;
+							for (int a = 37; a <= w; ++a) { // si x>w
 								carte[a][audessus] = 3;
 							}
 						}
@@ -298,7 +298,7 @@ public class CalculCarte {
 								}
 	
 							} else {
-								for (int a = 35; a <= x; ++a) { // si x>w
+								for (int a = 37; a <= x; ++a) { // si x>w
 									carte[a][hauteuriti] = 3;
 								}
 								
