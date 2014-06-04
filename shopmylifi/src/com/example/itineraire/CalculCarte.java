@@ -120,24 +120,24 @@ public class CalculCarte {
 						int trajet2 = Math.abs(38 - x) + 2 + Math.abs(38 - w);
 						if (trajet1 < trajet2) { // montant
 							for (int a = x; a <= 68; ++a) { // si x>w
-								carte[a][endessous] = 3;
+								carte[a][hauteuriti] = 3;
 							}
 
 							carte[68][y] = 3;
 							carte[68][z] = 3;
 
 							for (int a = w; a <= 68; ++a) { // si x>w
-								carte[a][audessus] = 3;
+								carte[a][hauteuritiforz] = 3;
 							}
 
 						} else {
 							for (int a = 37; a <= x; ++a) { // si x<w
-								carte[a][endessous] = 3;
+								carte[a][hauteuriti] = 3;
 							}
 							carte[37][y] = 3;
 							carte[37][z] = 3;
 							for (int a = 37; a <= w; ++a) { // si x>w
-								carte[a][audessus] = 3;
+								carte[a][hauteuritiforz] = 3;
 							}
 						}
 
@@ -147,26 +147,26 @@ public class CalculCarte {
 																		// du
 																		// magasin
 							int trajet1 = Math.abs(33 - x) + 2
-									+ Math.abs(35 - w); // droit
+									+ Math.abs(33 - w); // droit
 							int trajet2 = Math.abs(4 - x) + 2 + Math.abs(4 - w);
 							if (trajet1 < trajet2) {
 								for (int a = x; a <= 33; ++a) { // si x>w
-									carte[a][endessous] = 3;
+									carte[a][hauteuriti] = 3;
 								}
 								carte[33][y] = 3;
 								carte[33][z] = 3;
 								for (int a = w; a <= 33; ++a) { // si x>w
-									carte[a][audessus] = 3;
+									carte[a][hauteuritiforz] = 3;
 								}
 
 							} else {
 								for (int a = 4; a <= x; ++a) { // si x<w
-									carte[a][endessous] = 3;
+									carte[a][hauteuriti] = 3;
 								}
 								carte[4][y] = 3;
 								carte[4][z] = 3;
 								for (int a = 4; a <= w; ++a) { // si x>w
-									carte[a][audessus] = 3;
+									carte[a][hauteuritiforz] = 3;
 								}
 							}
 
@@ -174,23 +174,23 @@ public class CalculCarte {
 							if ((x < largeur / 2) && (w > largeur / 2)) {
 
 								for (int a = x; a <= 37; ++a) { // si x>w
-									carte[a][endessous] = 3;
+									carte[a][hauteuriti] = 3;
 								}
 								carte[37][y] = 3;
 								carte[37][z] = 3;
 								for (int a = 37; a <= w; ++a) { // si x>w
-									carte[a][audessus] = 3;
+									carte[a][hauteuritiforz] = 3;
 								}
 
 							} else {
 
 								for (int a = 37; a <= x; ++a) { // si x>w
-									carte[a][endessous] = 3;
+									carte[a][hauteuriti] = 3;
 								}
 								carte[37][y] = 3;
 								carte[37][z] = 3;
 								for (int a = w; a <= 37; ++a) { // si x>w
-									carte[a][audessus] = 3;
+									carte[a][hauteuritiforz] = 3;
 								}
 
 							}
@@ -202,11 +202,11 @@ public class CalculCarte {
 					if (Math.abs(y - z) == 4)  {
 						if (x==w) {
 							if (z > y) {
-								for (int a = hauteuriti; a < z; a++) { // go en haut
+								for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 									carte[x][a] = 3;
 								}
 							} else {
-								for (int a = hauteuritiforz; a < y; a++) { // go en haut
+								for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 									carte[x][a] = 3;
 								}
 							}
@@ -229,11 +229,11 @@ public class CalculCarte {
 								carte[a][hauteuriti] = 3;
 							}
 							if (z > y) {
-								for (int a = y; a < z; a++) { // go en haut
+								for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 									carte[37][a] = 3;
 								}
 							} else {
-								for (int a = z; a < y; a++) { // go en haut
+								for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 									carte[37][a] = 3;
 								}
 							}
@@ -253,11 +253,11 @@ public class CalculCarte {
 								carte[a][hauteuriti] = 3;
 							}
 							if (z > y) {
-								for (int a = y; a < z; a++) { // go en haut
+								for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 									carte[37][a] = 3;
 								}
 							} else {
-								for (int a = z; a < y; a++) { // go en haut
+								for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 									carte[37][a] = 3;
 								}
 							}
@@ -284,11 +284,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = y; a < z; a++) { // go en haut
+									for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 										carte[68][a] = 3;
 									}
 								} else {
-									for (int a = z; a < y; a++) { // go en haut
+									for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 										carte[68][a] = 3;
 									}
 								}
@@ -303,11 +303,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = y; a < z; a++) { // go en haut
+									for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 										carte[37][a] = 3;
 									}
 								} else {
-									for (int a = z; a < y; a++) { // go en haut
+									for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 										carte[37][a] = 3;
 									}
 								}
@@ -334,11 +334,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = y; a < z; a++) { // go en haut
+									for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 										carte[35][a] = 3;
 									}
 								} else {
-									for (int a = z; a < y; a++) { // go en haut
+									for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 										carte[35][a] = 3;
 									}
 								}
@@ -353,11 +353,11 @@ public class CalculCarte {
 								}
 								
 								if (z > y) {
-									for (int a = hauteuriti; a < z; a++) { // go en haut
+									for (int a = hauteuriti; a < hauteuritiforz; a++) { // go en haut
 										carte[4][a] = 3;
 									}
 								} else {
-									for (int a = hauteuritiforz; a < y; a++) { // go en haut
+									for (int a = hauteuritiforz; a < hauteuriti; a++) { // go en haut
 										carte[4][a] = 3;
 									}
 								}
