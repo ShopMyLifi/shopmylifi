@@ -64,6 +64,9 @@ public class CalculCarte {
 			if ((carte[w][z + 1] == 2) || (carte[w][z + 1] == 4)) {
 				hauteuritiforz = z - 1;
 			}
+			if (z==1) {
+				hauteuritiforz=0;
+			}
 			if (z > y) { // initialisation
 				hauteurdouble = y + 2;
 			} else {
@@ -75,18 +78,30 @@ public class CalculCarte {
 			carte[w][z] = 4;
 
 			if (y == z) { // si m�me hauteur de rayon
+				if (y==1) {
+					if (x > w) {
 
-				if (x > w) {
-
-					for (int a = w; a <= x; ++a) { // si x>w
-						carte[a][hauteuritiforz] = 3;
+						for (int a = w; a <= x; ++a) { // si x>w
+							carte[a][0] = 3;
+						}
+					} else {
+						for (int a = x; a <= w; ++a) { // si x<w
+							carte[a][0] = 3;
+						}
 					}
+					
 				} else {
-					for (int a = x; a <= w; ++a) { // si x<w
-						carte[a][hauteuritiforz] = 3;
+					if (x > w) {
+	
+						for (int a = w; a <= x; ++a) { // si x>w
+							carte[a][hauteuriti] = 3;
+						}
+					} else {
+						for (int a = x; a <= w; ++a) { // si x<w
+							carte[a][hauteuritiforz] = 3;
+						}
 					}
 				}
-
 			} else {
 				if (Math.abs(y - z) == 1) { // si m�me rayon mais face oppos�s
 					int endessous;
