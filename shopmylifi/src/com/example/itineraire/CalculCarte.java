@@ -77,7 +77,7 @@ public class CalculCarte {
 			}
 
 			// ajout des points de chaque article
-			carte[x][y] = i + 100;
+			carte[x][y] = 4;
 			carte[w][z] = 4;
 
 			if (y == z) { // si m�me hauteur de rayon
@@ -407,7 +407,12 @@ public class CalculCarte {
 			}
 
 		}
-
+		
+		for (int i = 0; i < association.size() + 1; ++i) {
+			int x = matrice[i][0];
+			int y = matrice[i][1];
+			carte[x][y] = 100+i;
+		}
 		return (carte);
 
 	}
