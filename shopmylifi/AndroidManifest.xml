@@ -43,10 +43,6 @@
             android:label="@string/title_display_reglages"
             android:screenOrientation="portrait" />
          <activity
-            android:name=".ItineraireActivity"
-            android:label="@string/title_itineraire"
-            android:screenOrientation="portrait" />
-         <activity
             android:name="CarteActivity"
             android:label="@string/title_display_carte"
             android:screenOrientation="portrait" />

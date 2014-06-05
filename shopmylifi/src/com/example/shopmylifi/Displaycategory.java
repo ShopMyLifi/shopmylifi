@@ -140,7 +140,7 @@ public class Displaycategory extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				String textaffichage = textselected + " ajout� la liste";
+				String textaffichage = textselected + " ajouté à la liste";
 				Toast toast = Toast.makeText(getApplicationContext(),
 						textaffichage, Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER, 0, 0);

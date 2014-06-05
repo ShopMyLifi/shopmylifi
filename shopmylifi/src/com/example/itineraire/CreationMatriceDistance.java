@@ -16,32 +16,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.example.shopmylifi.R;
-import com.example.shopmylifi.R.id;
-import com.example.shopmylifi.R.layout;
-
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class CreationMatriceDistance {
 
-	private ProgressDialog pDialog;
 	private static String url_get_position = "http://192.3.203.70/getposition.php";
 	private static String resultstring;
-	
+
 	public static String getString() {
 		return resultstring;
 	}
@@ -69,7 +51,7 @@ public class CreationMatriceDistance {
 		String[] values = resultstring.split("\"");
 
 		ArrayList<String> association = new ArrayList<String>();
-		
+
 		setString(resultstring);
 
 		for (int i = 0; i < values.length; ++i) {
@@ -85,26 +67,26 @@ public class CreationMatriceDistance {
 			}
 		}
 
-		int[][] matrice = new int[association.size()+1][association.size()+1];
-		int x,y,w,z;
-		for (int i = 0; i < association.size()+1; ++i) { // value of id
+		int[][] matrice = new int[association.size() + 1][association.size() + 1];
+		int x, y, w, z;
+		for (int i = 0; i < association.size() + 1; ++i) { // value of id
 
-			if (i==0) {
-				 x = 36;
-				 y = 1;
+			if (i == 0) {
+				x = 36;
+				y = 1;
 			} else {
-				
-			 x = Integer.valueOf(values[12 * (i-1) + 7]);
-			 y = Integer.valueOf(values[12 * (i-1) + 11]);
+
+				x = Integer.valueOf(values[12 * (i - 1) + 7]);
+				y = Integer.valueOf(values[12 * (i - 1) + 11]);
 			}
-			
-			for (int j = 0; j < association.size()+1; j++) {
-				if (j==0) {
-					 w = 36;
-					 z = 1;
+
+			for (int j = 0; j < association.size() + 1; j++) {
+				if (j == 0) {
+					w = 36;
+					z = 1;
 				} else {
-				 w = Integer.valueOf(values[12 * (j-1) + 7]);
-				 z = Integer.valueOf(values[12 * (j-1) + 11]);
+					w = Integer.valueOf(values[12 * (j - 1) + 7]);
+					z = Integer.valueOf(values[12 * (j - 1) + 11]);
 				}
 				matrice[i][j] = calculdistance(x, y, w, z, 76);
 
@@ -113,8 +95,8 @@ public class CreationMatriceDistance {
 
 		Log.d("this is my deep array",
 				"deep arr: " + Arrays.deepToString(matrice));
-		
-		return(matrice);
+
+		return (matrice);
 
 	}
 
@@ -182,19 +164,6 @@ public class CreationMatriceDistance {
 	class getposition extends AsyncTask<String, String, String> {
 
 		/**
-		 * Before starting background thread Show Progress Dialog
-		 * */
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// pDialog = new ProgressDialog(CreationMatriceDistance.this);
-			// pDialog.setMessage("Chargement de la liste en cours...");
-			// pDialog.setIndeterminate(false);
-			// pDialog.setCancelable(false);
-			// pDialog.show();
-		}
-
-		/**
 		 * getting All products from url
 		 * */
 		protected String doInBackground(String... args) {
@@ -243,12 +212,6 @@ public class CreationMatriceDistance {
 
 		}
 
-		protected void onPostExecute(String file_url) {
-			// dismiss the dialog after getting all products
-			//pDialog.dismiss();
-			// updating UI from Background Thread
-
-		}
 	}
 
 }

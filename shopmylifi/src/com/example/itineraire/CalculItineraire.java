@@ -1,7 +1,5 @@
 package com.example.itineraire;
 
-import java.util.Arrays;
-
 //import android.util.Log;
 
 public class CalculItineraire {
@@ -13,8 +11,9 @@ public class CalculItineraire {
 	public static void computeIti(int matriceD[][], int iti[]) {
 
 		int dim = matriceD.length;
-		
-		if(dim==0) return;
+
+		if (dim == 0)
+			return;
 
 		// matrice qui indique les deux voisins d'un élément
 		int matriceN[][] = new int[dim][2];
@@ -25,7 +24,7 @@ public class CalculItineraire {
 
 		iti[0] = 0;
 
-		for (int i = 0; i < dim ; i++) {
+		for (int i = 0; i < dim; i++) {
 			iti[i + 1] = matriceN[iti[i]][NN];
 		}
 	}
@@ -158,17 +157,4 @@ public class CalculItineraire {
 
 	}
 
-	/*
-	 * public static void main(String[] args) { int matrice[][] = { { 0, 8, 6,
-	 * 10, 7, 16, 16, 16, 4 }, { 8, 0, 8, 4, 13, 8, 8, 8, 12 }, { 6, 8, 0, 4, 5,
-	 * 10, 16, 10, 4 }, { 10, 4, 4, 0, 9, 6, 12, 6, 8 }, { 7, 13, 5, 9, 0, 15,
-	 * 21, 9, 5 }, { 16, 8, 10, 6, 15, 0, 6, 6, 14 }, { 16, 8, 16, 12, 21, 6, 0,
-	 * 12, 21 }, { 16, 8, 10, 6, 9, 6, 12, 0, 14 }, { 4, 12, 4, 8, 5, 14, 21,
-	 * 14, 0 } };
-	 * 
-	 * int dim = matrice.length; int[] iti = new int[dim + 1];
-	 * computeIti(matrice, iti);
-	 * 
-	 * }
-	 */
 }
