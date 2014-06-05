@@ -99,6 +99,7 @@ public class CreationImages {
 		canvas.drawText("Itinéraire",baseY + Y_TXT_DEC, X_INIT + 7*SCALE, paintText);
 		
 		canvas.drawRect(baseY ,X_INIT + 8*SCALE,baseY + SCALE, X_INIT + 9*SCALE, paintArticle);
+		canvas.drawText("2", baseY-4, X_INIT + 9*SCALE, paintText);
 		canvas.drawText("Article",baseY + Y_TXT_DEC, X_INIT + 9*SCALE, paintText);
 
 		for (int i = 0; i < dim1; i++)
