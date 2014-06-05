@@ -21,13 +21,15 @@ public class CreationImages {
 	 * X axe vertical (croissant -> bas) 
 	 */
 	
+	static final int STARTARTICLE = 100;
+	static final int TEXTSIZE = 12;
 	static final int X1 = 36; 
 	static final int Y1 = 3;
 	static final int X2 = 36;
 	static final int Y2 = 9;
 	static final int X3 = 36;
 	static final int Y3 = 15;
-	static final int NUMBEROFPAINT = 5; // nombre de types de cases dans la
+	static final int NUMBEROFPAINT = 4; // nombre de types de cases dans la
 										// matrice, sans compter la position
 
 	public static void creationImage(int[][] matrice) throws Throwable {
@@ -65,22 +67,34 @@ public class CreationImages {
 		Paint paintArticle = new Paint();
 		paintArticle.setStyle(Paint.Style.FILL);
 		paintArticle.setARGB(255,248,197,37);
-		tabPaint[4] = paintArticle;
 
 		Paint paintPos = new Paint();
 		paintPos.setStyle(Paint.Style.FILL);
 		paintPos.setColor(Color.RED);
+		
+		Paint paintText = new Paint();
 
 		for (int i = 0; i < dim1; i++)
 			for (int j = 0; j < dim2; j++) {
 
 				int type = matrice[i][j];
-				if (type < NUMBEROFPAINT)
+				if (type < NUMBEROFPAINT) {
 					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
-							* SCALE + SCALE, tabPaint[matrice[i][j]]);
-				else
-					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
-							* SCALE + SCALE, paintCouloir);
+							* SCALE + SCALE, tabPaint[matrice[i][j]]);	
+				}
+				
+				else 				
+					if(type >= STARTARTICLE) {
+						canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
+								* SCALE + SCALE, paintArticle);	
+						paintText.setColor(Color.BLACK);
+						paintText.setTextSize(TEXTSIZE); 
+						canvas.drawText(Integer.toString(type-STARTARTICLE), j*SCALE - 4, (i+1)*SCALE, paintText);
+					}
+
+					else
+						canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
+								* SCALE + SCALE, paintCouloir);
 			}
 
 		canvas.drawRect(Y1 * SCALE, X1 * SCALE, Y1 * SCALE + SCALE, X1 * SCALE
