@@ -84,7 +84,7 @@ public class CalculCarte {
 			}
 			
 			//ajout des points de chaque article
-			carte[x][y]=4;
+			carte[x][y]=i+100;
 			carte[w][z]=4;
 			
 			if (y == z) { // si m�me hauteur de rayon
@@ -92,11 +92,11 @@ public class CalculCarte {
 				if (x > w) {
 
 					for (int a = w; a <= x; ++a) { // si x>w
-						carte[a][hauteuriti] = 3;
+						carte[a][hauteuritiforz] = 3;
 					}
 				} else {
 					for (int a = x; a <= w; ++a) { // si x<w
-						carte[a][hauteuriti] = 3;
+						carte[a][hauteuritiforz] = 3;
 					}
 				}
 
