@@ -67,6 +67,9 @@ public class CalculCarte {
 			if (z==1) {
 				hauteuritiforz=0;
 			}
+			if (y==1) {
+				hauteuriti=0;
+			}
 			if (z > y) { // initialisation
 				hauteurdouble = y + 2;
 			} else {
