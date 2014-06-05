@@ -15,15 +15,17 @@ public class CreationImages {
 
 	static final int SCALE = 10;
 	/*
-	 * POSITIONS DES CAPTEURS LIFI 
-	 * origine en haut à gauche 
-	 * Y axe horizontal (croissant -> droite)
-	 * X axe vertical (croissant -> bas) 
+	 * POSITIONS DES CAPTEURS LIFI origine en haut à gauche Y axe horizontal
+	 * (croissant -> droite) X axe vertical (croissant -> bas)
 	 */
 	
+	static final int Y_TXT_DEC = SCALE * 2;
+	static final int X_INIT = 50;
+	static final int X_LEG = 50;
+	static final int SIZELEGENDE = 100;
 	static final int STARTARTICLE = 100;
 	static final int TEXTSIZE = 12;
-	static final int X1 = 36; 
+	static final int X1 = 36;
 	static final int Y1 = 3;
 	static final int X2 = 36;
 	static final int Y2 = 9;
@@ -37,8 +39,8 @@ public class CreationImages {
 		int dim1 = matrice.length;
 		int dim2 = matrice[0].length;
 
-		Bitmap bitmap = Bitmap.createBitmap(dim2 * SCALE, dim1 * SCALE,
-				Bitmap.Config.ARGB_8888);
+		Bitmap bitmap = Bitmap.createBitmap(dim2 * SCALE + SIZELEGENDE, dim1
+				* SCALE, Bitmap.Config.ARGB_8888);
 
 		Canvas canvas = new Canvas(bitmap);
 
@@ -51,28 +53,53 @@ public class CreationImages {
 
 		Paint paintCaisse = new Paint();
 		paintCaisse.setStyle(Paint.Style.FILL);
-		paintCaisse.setARGB(255,37,151,248);
+		paintCaisse.setARGB(255, 37, 151, 248);
 		tabPaint[1] = paintCaisse;
 
 		Paint paintRayon = new Paint();
 		paintRayon.setStyle(Paint.Style.FILL);
-		paintRayon.setARGB(255,109,185,0);
+		paintRayon.setARGB(255, 109, 185, 0);
 		tabPaint[2] = paintRayon;
 
 		Paint paintItineraire = new Paint();
 		paintItineraire.setStyle(Paint.Style.FILL);
-		paintItineraire.setARGB(255,248,176,37);
+		paintItineraire.setARGB(255, 248, 176, 37);
 		tabPaint[3] = paintItineraire;
-		
+
 		Paint paintArticle = new Paint();
 		paintArticle.setStyle(Paint.Style.FILL);
-		paintArticle.setARGB(255,248,197,37);
+		paintArticle.setARGB(255, 248, 197, 37);
 
 		Paint paintPos = new Paint();
 		paintPos.setStyle(Paint.Style.FILL);
 		paintPos.setColor(Color.RED);
-		
+
 		Paint paintText = new Paint();
+		paintText.setColor(Color.BLACK);
+		paintText.setTextSize(TEXTSIZE);
+
+		// fond blanc pour la légende
+		canvas.drawRect(dim2 * SCALE, 0, dim2 * SCALE + SIZELEGENDE, dim1
+				* SCALE, paintCouloir);
+
+		int baseY = (dim2 +1 + 1) * SCALE  ;
+		
+		
+		//création légende
+		canvas.drawRect(baseY ,X_INIT,baseY + SCALE, X_INIT + SCALE, paintRayon);
+		canvas.drawText("Rayon",baseY + Y_TXT_DEC, X_INIT + SCALE, paintText);
+		
+		canvas.drawRect(baseY ,X_INIT + 2*SCALE,baseY + SCALE, X_INIT + 3*SCALE, paintCaisse);
+		canvas.drawText("Caisse",baseY + Y_TXT_DEC, X_INIT + 3*SCALE, paintText);
+		
+		canvas.drawRect(baseY ,X_INIT + 4*SCALE,baseY + SCALE, X_INIT + 5*SCALE, paintPos);
+		canvas.drawText("Position",baseY + Y_TXT_DEC, X_INIT + 5*SCALE, paintText);
+		
+		canvas.drawRect(baseY ,X_INIT + 6*SCALE,baseY + SCALE, X_INIT + 7*SCALE, paintItineraire);
+		canvas.drawText("Itinéraire",baseY + Y_TXT_DEC, X_INIT + 7*SCALE, paintText);
+		
+		canvas.drawRect(baseY ,X_INIT + 8*SCALE,baseY + SCALE, X_INIT + 9*SCALE, paintArticle);
+		canvas.drawText("Article",baseY + Y_TXT_DEC, X_INIT + 9*SCALE, paintText);
 
 		for (int i = 0; i < dim1; i++)
 			for (int j = 0; j < dim2; j++) {
@@ -80,21 +107,19 @@ public class CreationImages {
 				int type = matrice[i][j];
 				if (type < NUMBEROFPAINT) {
 					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
-							* SCALE + SCALE, tabPaint[matrice[i][j]]);	
+							* SCALE + SCALE, tabPaint[matrice[i][j]]);
 				}
-				
-				else 				
-					if(type >= STARTARTICLE) {
-						canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
-								* SCALE + SCALE, paintArticle);	
-						paintText.setColor(Color.BLACK);
-						paintText.setTextSize(TEXTSIZE); 
-						canvas.drawText(Integer.toString(type-STARTARTICLE), j*SCALE - 4, (i+1)*SCALE, paintText);
-					}
 
-					else
-						canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
-								* SCALE + SCALE, paintCouloir);
+				else if (type > STARTARTICLE) {
+					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
+							* SCALE + SCALE, paintArticle);
+					canvas.drawText(Integer.toString(type - STARTARTICLE), j
+							* SCALE - 4, (i + 1) * SCALE, paintText);
+				}
+
+				else
+					canvas.drawRect(j * SCALE, i * SCALE, j * SCALE + SCALE, i
+							* SCALE + SCALE, paintCouloir);
 			}
 
 		canvas.drawRect(Y1 * SCALE, X1 * SCALE, Y1 * SCALE + SCALE, X1 * SCALE
